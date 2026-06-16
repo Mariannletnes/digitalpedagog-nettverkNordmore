@@ -6,6 +6,66 @@
 <title>Tilbakeblikk og veien videre · Digitalpedagog-nettverk Nordmøre</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Fargesatte kortvarianter */
+  .kort-sand {
+    background: linear-gradient(135deg, #f5ede0 0%, #fff 60%);
+    border-top: 4px solid var(--sand);
+    border: 1px solid rgba(200,169,122,0.3);
+    border-top: 4px solid var(--sand);
+  }
+  .kort-navy {
+    background: linear-gradient(135deg, #eef1f7 0%, #fff 60%);
+    border: 1px solid rgba(26,42,74,0.15);
+    border-top: 4px solid var(--navy);
+  }
+  .kort-gronn {
+    background: linear-gradient(135deg, #eef4f1 0%, #fff 60%);
+    border: 1px solid rgba(58,106,90,0.2);
+    border-top: 4px solid var(--gronn);
+  }
+  .kort-brun {
+    background: linear-gradient(135deg, #f5ede0 0%, #fff 60%);
+    border: 1px solid rgba(74,46,26,0.15);
+    border-top: 4px solid var(--brun);
+  }
+
+  /* Two-col med jevn høyde */
+  .two-col-stretch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    align-items: stretch;
+  }
+  .two-col-stretch > * {
+    margin-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+  }
+  .two-col-stretch .detail-card p:last-of-type,
+  .two-col-stretch .detail-card ul:last-child {
+    flex: 1;
+  }
+
+  /* Farget seksjonsstripe */
+  .seksjon-stripe {
+    padding: 0.6rem 2rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 2rem 0 0.5rem;
+  }
+  .stripe-sand { background: var(--sand); color: var(--brun); }
+  .stripe-navy { background: var(--navy); color: rgba(255,255,255,0.8); }
+  .stripe-gronn { background: var(--gronn); color: rgba(255,255,255,0.85); }
+  .stripe-brun { background: var(--brun); color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 800px) {
+    .two-col-stretch { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -39,26 +99,27 @@
 
 <div class="container">
 
-  <div class="detail-card">
-    <h2>Om samlingen</h2>
-    <p>Den femte samlingen er bygget rundt to ting: det deltakerne selv har lært og erfart gjennom det første nettverksåret, og blikket fremover. Gjennom teach-meet, surveyanalyse og planlegging av fagdagen i 2028 samles trådene fra samlingene om PfDK, endringsledelse, estetikk og KI – og nettverkssamarbeidet fortsetter inn i neste år.</p>
-    <p>Skole og barnehage er samlet gjennom hele dagen. Nettverket fortsetter.</p>
-  </div>
-
-  <div class="detail-card">
-    <h2>Forarbeid til samlingen</h2>
-    <p>Begge løp – skole og barnehage – har samme forarbeid:</p>
-    <ul class="question-list" style="margin-top: 0.75rem;">
-      <li>Gjennomfør surveyen før samlingen</li>
-      <li>Forbered en tre-minutters teach-meet-presentasjon: vis en digital funksjon, et program eller et konkret tips du bruker i jobben din og som andre bør kjenne til</li>
-    </ul>
-    <div class="note-box" style="margin-top: 1rem;">
-      Velg gjerne noe du selv har hatt stor nytte av – ikke nødvendigvis det mest avanserte, men det mest nyttige.
+  <div class="two-col-stretch" style="margin-top: 0;">
+    <div class="detail-card kort-navy">
+      <h2>Om samlingen</h2>
+      <p>Den femte samlingen er bygget rundt to ting: det deltakerne selv har lært og erfart gjennom det første nettverksåret, og blikket fremover. Gjennom teach-meet, surveyanalyse og planlegging av fagdagen i 2028 samles trådene fra samlingene om PfDK, endringsledelse, estetikk og KI – og nettverkssamarbeidet fortsetter inn i neste år.</p>
+      <p>Skole og barnehage er samlet gjennom hele dagen. Nettverket fortsetter.</p>
+    </div>
+    <div class="detail-card kort-sand">
+      <h2>Forarbeid til samlingen</h2>
+      <p>Begge løp – skole og barnehage – har samme forarbeid:</p>
+      <ul class="question-list" style="margin-top: 0.75rem;">
+        <li>Gjennomfør surveyen før samlingen</li>
+        <li>Forbered en tre-minutters teach-meet-presentasjon: vis en digital funksjon, et program eller et konkret tips du bruker i jobben din og som andre bør kjenne til</li>
+      </ul>
+      <div class="note-box" style="margin-top: 1rem;">
+        Velg gjerne noe du selv har hatt stor nytte av – ikke nødvendigvis det mest avanserte, men det mest nyttige.
+      </div>
     </div>
   </div>
 
   <!-- Program -->
-  <div class="program" style="margin-bottom: 1.5rem;">
+  <div class="program" style="margin-top: 1.5rem; margin-bottom: 0;">
     <div class="program-header">Program · Tirsdag 17. juni 2026</div>
     <div class="program-row"><div class="program-time">09.15–10.00</div><div class="program-text">Tilbakeblikk og veien videre · Etablering av nettverksgrupper</div></div>
     <div class="program-row"><div class="program-time">10.00–10.45</div><div class="program-text">Teach-meet: deltakerne presenterer digitale tips og verktøy for hverandre</div></div>
@@ -71,16 +132,18 @@
     <div class="program-row"><div class="program-time">14.30–15.00</div><div class="program-text">Oppsummering og veien videre</div></div>
   </div>
 
-  <div class="two-col">
-    <div class="detail-card" style="margin-bottom: 0;">
-      <h2>Teach-meet: del det som virker</h2>
+  <!-- TEACH-MEET -->
+  <div class="seksjon-stripe stripe-sand">Teach-meet</div>
+  <div class="two-col-stretch">
+    <div class="detail-card kort-sand">
+      <h2>Del det som virker</h2>
       <p>Teach-meet er en kort og konkret erfaringsdeling der hver deltaker presenterer noe digitalt de faktisk bruker og har nytte av i jobben sin – på tre minutter. Det kan være en funksjon, et program, et verktøy eller et konkret tips som gjør arbeidsdagen mer effektiv, bedre eller rett og slett artigere.</p>
       <p>Poenget er ikke å vise fram det mest avanserte. Poenget er å dele noe ekte – noe du selv har hatt stor glede av og som du tror andre også bør kjenne til.</p>
-      <div class="note-box">
-        <strong>Forarbeid:</strong> Forbered en presentasjon på tre minutter der du viser en digital funksjon, et program eller et konkret digitalt tips du bruker i jobben din. Velg gjerne noe du selv har hatt stor nytte av og som du mener andre bør kjenne til.
+      <div class="note-box" style="margin-top: auto; margin-top: 1rem;">
+        <strong>Forarbeid:</strong> Forbered en presentasjon på tre minutter. Velg noe du selv har hatt stor nytte av og som du mener andre bør kjenne til.
       </div>
     </div>
-    <div class="detail-card" style="margin-bottom: 0;">
+    <div class="detail-card kort-brun">
       <h2>Om teach-meet som metode</h2>
       <p>Teach-meet er en enkel og likeverdig delingsmetode med røtter i britiske lærermiljøer på 2000-tallet. Kjennetegnene er:</p>
       <ul class="question-list" style="margin-top: 0.5rem;">
@@ -89,59 +152,65 @@
         <li><strong>Praksisrettet</strong> – ikke teori, men noe man faktisk bruker i hverdagen.</li>
         <li><strong>Frivillig</strong> – man deler det man selv har lyst til å vise.</li>
       </ul>
-      <p style="margin-top: 0.75rem;">Det pedagogiske poenget er at den beste kompetanseutviklingen ofte skjer i kollegiet – ikke utenfra. Teach-meet gjør synlig den kunnskapen som allerede finnes i rommet. For en gruppe fra mange ulike enheter er dette særlig verdifullt: deltakerne ser hva som faktisk brukes i barnehager og skoler i Nordmøre – ikke generiske tips fra internett.</p>
+      <p style="margin-top: 0.75rem;">Den beste kompetanseutviklingen skjer ofte i kollegiet – ikke utenfra. Teach-meet gjør synlig den kunnskapen som allerede finnes i rommet. For en gruppe fra mange ulike enheter er dette særlig verdifullt: deltakerne ser hva som faktisk brukes i barnehager og skoler i Nordmøre – ikke generiske tips fra internett.</p>
     </div>
   </div>
 
-  <div class="detail-card">
-    <h2>TPACK</h2>
+  <!-- FAGINNHOLD OG MINI NKUL -->
+  <div class="seksjon-stripe stripe-navy">Faginnhold og Mini NKUL</div>
+  <div class="two-col-stretch">
+    <div class="detail-card kort-navy">
+      <h2>Erfaringsdeling · Morten Sikkeland</h2>
+      <p>Morten Sikkeland ved Nordlandet barneskole presenterer <strong>digitalkompetanseplan.no</strong> – en digital kompetanseplan for Oppvekstnettverk Nordmøre. Planen gir skolene i regionen et felles utgangspunkt for å arbeide systematisk med digital kompetanse gjennom hele skoleløpet, fra barnehage til 10. klasse.</p>
+      <p>Dette er et konkret eksempel på lokal forankring og praksisnær utvikling – akkurat det nettverket har arbeidet mot gjennom hele nettverksåret.</p>
+      <a class="resource-link" href="https://www.digitalkompetanseplan.no/index.html" target="_blank" rel="noopener noreferrer" style="margin-top: auto; margin-top: 1rem; display: inline-block;">Besøk digitalkompetanseplan.no →</a>
+    </div>
+    <div class="detail-card kort-gronn">
+      <h2>Nettsted og Mini NKUL</h2>
+      <p>NKUL er en nasjonal konferanse for digital kompetanse der skoler og barnehager deler erfaringer og praksis med hverandre. Mini NKUL i dette nettverket følger samme idé: en fagdag der enhetene presenterer sitt arbeid og sine erfaringer fra prosjektperioden frem mot 2028.</p>
+      <p>I denne økten planlegger vi veien dit: hva slags fagdag vil vi ha, hva er ambisjonene, og hva må vi gjøre for å komme dit innen januar 2028?</p>
+      <div class="note-box" style="margin-top: 1rem;">
+        <strong>Fagdagen arrangeres 3. januar 2028.</strong> Innholdet vokser frem fra enhetenes egne prosjekter og erfaringer.
+      </div>
+    </div>
+  </div>
+
+  <!-- TPACK -->
+  <div class="seksjon-stripe stripe-brun">TPACK</div>
+  <div class="detail-card kort-brun">
+    <h2>TPACK – rammeverket vi har jobbet med</h2>
     <p>I løpet av nettverksåret har vi jobbet med TPACK-rammeverket (Technological Pedagogical Content Knowledge) – et internasjonalt rammeverk som beskriver samspillet mellom teknologikunnskap, fagkunnskap og pedagogisk kunnskap, og som er ett av de faglige grunnlagene for det norske PfDK-rammeverket.</p>
     <p>Her kan du lese om opprinnelsen til rammeverket, de tre kunnskapsbasene og hvordan de virker sammen – og finne refleksjonsspørsmål du kan ta med tilbake til din enhet.</p>
     <a class="resource-link" href="tpack.html">Les om TPACK-rammeverket →</a>
   </div>
 
-  <div class="two-col">
-    <div class="detail-card" style="margin-bottom: 0;">
-      <h2>Nettsted og Mini NKUL – planlegging av fagdag 3. januar 2028</h2>
-      <p>NKUL er en nasjonal konferanse for digital kompetanse der skoler og barnehager deler erfaringer og praksis med hverandre. Mini NKUL i dette nettverket følger samme idé: en fagdag der enhetene presenterer sitt arbeid og sine erfaringer fra prosjektperioden frem mot 2028.</p>
-      <p>Hvem som skal presentere og hva de skal vise er ikke bestemt ennå – det avhenger av hva enhetene utvikler gjennom arbeidet med prosjektbeskrivelsene. I denne økten handler det om å planlegge veien dit: hva slags fagdag vil vi ha, hva er ambisjonene, og hva må vi gjøre for å komme dit innen januar 2028?</p>
-      <div class="note-box">
-        <strong>Fagdagen arrangeres 3. januar 2028.</strong> Innholdet vokser frem fra enhetenes egne prosjekter og erfaringer i perioden frem mot fagdagen.
-      </div>
-    </div>
-    <div class="detail-card" style="margin-bottom: 0;">
-      <h2>Erfaringsdeling · Morten Sikkeland – Nordlandet barneskole</h2>
-      <p>Morten Sikkeland ved Nordlandet barneskole presenterer <strong>digitalkompetanseplan.no</strong> – en digital kompetanseplan for Oppvekstnettverk Nordmøre som han har utviklet. Planen gir skolene i regionen et felles utgangspunkt for å arbeide systematisk med digital kompetanse gjennom hele skoleløpet, fra barnehage til 10. klasse.</p>
-      <p>Dette er et konkret eksempel på lokal forankring og praksisnær utvikling – akkurat det nettverket har arbeidet mot gjennom hele nettverksåret.</p>
-      <a class="resource-link" href="https://www.digitalkompetanseplan.no/index.html" target="_blank" rel="noopener noreferrer">Besøk digitalkompetanseplan.no →</a>
-    </div>
-  </div>
-
-  <div class="detail-card">
+  <!-- SURVEY -->
+  <div class="seksjon-stripe stripe-gronn">Surveyanalyse og prosjektbeskrivelse</div>
+  <div class="detail-card kort-gronn">
     <h2>Surveyanalyse og prosjektbeskrivelse</h2>
     <p>Alle deltakere representerer sin enhet – skole eller barnehage – og får på samlingen rapporten fra presurvey som personalet ved enheten har gjennomført. Rapporten gir et bilde av ståstedet: hva personalet opplever at de mestrer, hva de er usikre på, og hva de trenger å utvikle videre. Denne innsikten er grunnlaget for å skrive en lokal prosjektbeskrivelse for neste skole- og barnehageår.</p>
     <p>Erfaringen er at ikke alle enheter rekker å gjennomføre surveyen i forkant. Økten er derfor delt i to parallelle spor:</p>
 
-    <div class="two-col" style="margin-top: 1rem;">
-      <div class="mini-box">
-        <h3>Spor A – rapporten er klar</h3>
+    <div class="two-col-stretch" style="margin-top: 1rem;">
+      <div class="mini-box" style="background: #eef3f8; border-color: #b8cfe0; display: flex; flex-direction: column;">
+        <h3 style="color: var(--navy);">Spor A – rapporten er klar</h3>
         <p>Du har rapporten fra din enhet og går igjennom funnene. Hva sier dataene om ståstedet? Hva overrasker deg? Hva bekrefter det du allerede visste?</p>
         <p>Bruk funnene til å starte arbeidet med prosjektbeskrivelsen: hva vil enheten prioritere, hvorfor, og hvordan.</p>
-        <div style="margin-top: 1rem;">
+        <div style="margin-top: auto; padding-top: 1rem;">
           <a class="resource-link" href="spora-samling5.html" target="_blank">Åpne Spor A-ark →</a>
         </div>
       </div>
-      <div class="mini-box">
-        <h3>Spor B – surveyen ikke gjennomført</h3>
+      <div class="mini-box" style="background: #eef4f1; border-color: #b0d4c4; display: flex; flex-direction: column;">
+        <h3 style="color: var(--gronn);">Spor B – surveyen ikke gjennomført</h3>
         <p>Du har ikke rapporten ennå – men du trenger den for å forankre kompetanseutviklingen ved din enhet. Lag en konkret plan for å skaffe deg den innsikten du mangler:</p>
         <ul class="question-list" style="margin-top: 0.5rem;">
           <li>Hvem ved min enhet må involveres for at surveyen faktisk blir gjennomført?</li>
-          <li>Når kan vi realistisk gjennomføre dette – og hvem har ansvar for å følge opp?</li>
-          <li>Hvordan presenterer jeg surveyen for ledelsen og personalet slik at de forstår hva den skal brukes til?</li>
-          <li>Hva vet jeg allerede om ståstedet ved min enhet – og hva trenger jeg å undersøke nærmere?</li>
-          <li>Hva må være på plass for at jeg kan skrive en god prosjektbeskrivelse etter samlingen?</li>
+          <li>Når kan vi realistisk gjennomføre dette – og hvem har ansvar?</li>
+          <li>Hvordan presenterer jeg surveyen for ledelsen og personalet?</li>
+          <li>Hva vet jeg allerede om ståstedet ved min enhet?</li>
+          <li>Hva må være på plass for å skrive en god prosjektbeskrivelse?</li>
         </ul>
-        <div style="margin-top: 1rem;">
+        <div style="margin-top: auto; padding-top: 1rem;">
           <a class="resource-link" href="sporb-samling5.html" target="_blank" style="background: var(--gronn);">Åpne Spor B-ark →</a>
         </div>
       </div>
@@ -151,32 +220,34 @@
     </div>
   </div>
 
-  <div class="detail-card">
-    <h2>Det første nettverksåret – fem steg</h2>
-    <p>Det første nettverksåret har beveget seg fra ståsted og rammeverk til praksis og deling:</p>
-    <ul class="question-list" style="margin-top: 0.5rem;">
-      <li><strong>S1:</strong> Oppstart – PfDK og situasjonsanalyse</li>
-      <li><strong>S2:</strong> Endringsledelse og distribuert ledelse</li>
-      <li><strong>S3:</strong> Sanselig og estetisk inngang til læring</li>
-      <li><strong>S4:</strong> Dybdedykk i kunstig intelligens</li>
-      <li><strong>S5:</strong> Tilbakeblikk, survey og veien videre</li>
-    </ul>
-  </div>
-
-  <div class="prompt-card">
-    <h2>Refleksjonsspørsmål</h2>
-    <ul class="question-list">
-      <li>Hva tar du med deg fra nettverksåret – faglig og praktisk?</li>
-      <li>Hva forteller ståstedsanalysen om der vi er nå – og hva vil vi prioritere i prosjektbeskrivelsen?</li>
-      <li>Hva er det viktigste du vil dele med andre på fagdagen i januar?</li>
-      <li>Hva trenger din enhet å arbeide videre med inn i neste nettverksår?</li>
-      <li>Hvordan kan nettverksgruppene som etableres i dag holde læringen i gang lokalt?</li>
-    </ul>
-    <div style="margin-top: 1.2rem;">
-      <a class="resource-link" href="refleksjon-samling5.html" target="_blank">Åpne refleksjonsark →</a>
+  <!-- NETTVERKSÅRET OG REFLEKSJON -->
+  <div class="seksjon-stripe stripe-navy">Tilbakeblikk og refleksjon</div>
+  <div class="two-col-stretch">
+    <div class="detail-card kort-navy">
+      <h2>Det første nettverksåret – fem steg</h2>
+      <p>Det første nettverksåret har beveget seg fra ståsted og rammeverk til praksis og deling:</p>
+      <ul class="question-list" style="margin-top: 0.5rem;">
+        <li><strong>S1:</strong> Oppstart – PfDK og situasjonsanalyse</li>
+        <li><strong>S2:</strong> Endringsledelse og distribuert ledelse</li>
+        <li><strong>S3:</strong> Sanselig og estetisk inngang til læring</li>
+        <li><strong>S4:</strong> Dybdedykk i kunstig intelligens</li>
+        <li><strong>S5:</strong> Tilbakeblikk, survey og veien videre</li>
+      </ul>
+    </div>
+    <div class="prompt-card" style="margin-bottom: 0; background: linear-gradient(135deg, #eef1f7 0%, #fff 60%); border-top: 4px solid var(--navy);">
+      <h2>Refleksjonsspørsmål</h2>
+      <ul class="question-list">
+        <li>Hva tar du med deg fra nettverksåret – faglig og praktisk?</li>
+        <li>Hva forteller ståstedsanalysen om der vi er nå?</li>
+        <li>Hva er det viktigste du vil dele på fagdagen i januar?</li>
+        <li>Hva trenger din enhet å arbeide videre med inn i neste nettverksår?</li>
+        <li>Hvordan kan nettverksgruppene holde læringen i gang lokalt?</li>
+      </ul>
+      <div style="margin-top: 1.2rem;">
+        <a class="resource-link" href="refleksjon-samling5.html" target="_blank">Åpne refleksjonsark →</a>
+      </div>
     </div>
   </div>
-
 
 </div>
 
