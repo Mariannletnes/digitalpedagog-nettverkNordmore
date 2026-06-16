@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2025–2026 · Digitalpedagog-nettverk Nordmøre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero-aar {
+    background: linear-gradient(150deg, #0e1a2e 0%, #1a2a4a 40%, #2a1a0e 100%);
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-aar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      45deg,
+      #c8a97a 0px, #c8a97a 1px,
+      transparent 1px, transparent 40px
+    );
+  }
+  .hero-aar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-aar-kicker {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200,169,122,0.7);
+    margin-bottom: 0.5rem;
+  }
+  .hero-aar-tittel {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(255,255,255,0.12);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-aar-antall {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: rgba(200,169,122,0.6);
+    margin-bottom: 0.4rem;
+  }
+  .hero-aar-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Aktivitetsgrid */
+  .aktivitet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .aktivitet-kort {
+    background: var(--hvit);
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem;
+    border-top: 3px solid var(--brun);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s, transform 0.45s, box-shadow 0.2s;
+    border: 1px solid rgba(74,46,26,0.1);
+    border-top: 3px solid var(--brun);
+  }
+  .aktivitet-kort.synlig { opacity: 1; transform: translateY(0); }
+  .aktivitet-kort:hover { box-shadow: 0 6px 24px rgba(74,46,26,0.12); transform: translateY(-2px); }
+
+  .ak-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--brun-lys);
+    margin-bottom: 0.5rem;
+  }
+  .ak-dato {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .ak-tittel {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--brun);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+  .ak-meta {
+    font-size: 0.8rem;
+    color: var(--tekst-lys);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .ak-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+  }
+  .ak-tag {
+    font-size: 0.64rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: var(--sand-lysere);
+    color: var(--brun);
+    padding: 0.14rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid rgba(74,46,26,0.1);
+  }
+  .ak-pil {
+    font-size: 0.82rem;
+    color: var(--brun);
+    margin-top: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* Farger per type */
+  .type-samling { border-top-color: var(--navy); }
+  .type-samling .ak-type { color: var(--navy); }
+  .type-teams { border-top-color: #2a5a9a; }
+  .type-teams .ak-type { color: #2a5a9a; }
+
+  @media (max-width: 700px) {
+    .aktivitet-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Digitalpedagog-nettverk Nordmøre</a>
+    <ul class="nav-links">
+      <li><a href="index.html#om">Om nettverket</a></li>
+      <li><a href="index.html#samlinger">Samlinger</a></li>
+      <li><a href="index.html#temaer">Temaer</a></li>
+      <li>
+        <a href="index.html" class="nav-home" title="Til forsiden" aria-label="Til forsiden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
+            <polyline points="9 21 9 12 15 12 15 21"/>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero-aar">
+  <div class="hero-aar-inner">
+    <div class="hero-aar-kicker">Digitalpedagog-nettverk Nordmøre · NTNU / DMMH</div>
+    <div class="hero-aar-tittel">2025–2026</div>
+    <div class="hero-aar-antall">5 samlinger</div>
+    <div class="hero-aar-sub">Første nettverksår. Fra ståsted og rammeverk til praksis, estetikk, kunstig intelligens og veien videre.</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="aktivitet-grid">
+
+    <a class="aktivitet-kort type-samling" href="samling-1.html">
+      <div class="ak-type">Samling · DevoldHolmen</div>
+      <div class="ak-dato">25. sep 2025</div>
+      <div class="ak-tittel">Oppstart: Hva er Digitalpedagog?</div>
+      <div class="ak-meta">Prosjektinnramming, ståstedsanalyse og introduksjon til PfDK som rammeverk for skole og barnehage.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">PfDK</span>
+        <span class="ak-tag">Ståstedsanalyse</span>
+        <span class="ak-tag">Gruppearbeid</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
+    <a class="aktivitet-kort type-teams" href="samling-2.html">
+      <div class="ak-type">Samling · Microsoft Teams</div>
+      <div class="ak-dato">12. nov 2025</div>
+      <div class="ak-tittel">Endringsledelse og situasjonsanalyse</div>
+      <div class="ak-meta">Digital samling med felles innramming og parallelle løp for skole og barnehage.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">Endringsledelse</span>
+        <span class="ak-tag">Distribuert ledelse</span>
+        <span class="ak-tag">Survey</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
+    <a class="aktivitet-kort type-samling" href="samling-3.html">
+      <div class="ak-type">Samling · DevoldHolmen</div>
+      <div class="ak-dato">10. des 2025</div>
+      <div class="ak-tittel">Sanselig og estetisk inngang til læring</div>
+      <div class="ak-meta">Skaperglede, akvarell, Book Creator, KI og didaktisk refleksjon rundt estetiske læreprosesser.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">Estetikk</span>
+        <span class="ak-tag">Book Creator</span>
+        <span class="ak-tag">Klafki</span>
+        <span class="ak-tag">Affordance</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
+    <a class="aktivitet-kort type-samling" href="samling-4.html">
+      <div class="ak-type">Samling · DevoldHolmen</div>
+      <div class="ak-dato">4. feb 2026</div>
+      <div class="ak-tittel">Dybdedykk i kunstig intelligens</div>
+      <div class="ak-meta">Generativ KI, danning, falsk mestring og epistemisk arbeid i barnehage og skole.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">Generativ KI</span>
+        <span class="ak-tag">Danning</span>
+        <span class="ak-tag">Falsk mestring</span>
+        <span class="ak-tag">Epistemisk arbeid</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
+    <a class="aktivitet-kort type-samling" href="samling-5.html">
+      <div class="ak-type">Samling · DevoldHolmen</div>
+      <div class="ak-dato">29. apr 2026</div>
+      <div class="ak-tittel">Tilbakeblikk og veien videre</div>
+      <div class="ak-meta">Teach-meet, surveyanalyse, prosjektbeskrivelse og planlegging av fagdag januar 2028.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">Teach-meet</span>
+        <span class="ak-tag">Survey</span>
+        <span class="ak-tag">Mini NKUL</span>
+        <span class="ak-tag">Veien videre</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <strong>Digitalpedagog-nettverk Nordmøre</strong><br>
+  I samarbeid med NTNU og DMMH · Mari-Ann Letnes og Cecilie Skaalvik
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => {
+    if (x.isIntersecting) x.target.classList.add('synlig');
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.aktivitet-kort').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
