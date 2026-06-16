@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spor A – Surveyanalyse · Samling 5 · 17. juni 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2a4a;
+    --brun: #4a2e1a;
+    --sand: #c8a97a;
+    --sand-lys: #f5ede0;
+    --gronn: #3a6a5a;
+    --krem: #f7f2ec;
+    --tekst: #2d2318;
+    --tekst-lys: #6a5a48;
+    --hvit: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--krem);
+    color: var(--tekst);
+    padding: 2.5rem 2rem;
+  }
+
+  .skjerm-topp {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .skjerm-info strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.2rem;
+  }
+  .skjerm-info p { font-size: 0.82rem; color: var(--tekst-lys); line-height: 1.5; }
+  .knapper { display: flex; gap: 0.6rem; flex-shrink: 0; }
+  .knapp {
+    border: none;
+    border-radius: 100px;
+    padding: 0.6rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .knapp:hover { opacity: 0.85; }
+  .knapp-print { background: var(--navy); color: white; box-shadow: 0 4px 16px rgba(26,42,74,0.25); }
+  .knapp-nullstill { background: var(--hvit); color: var(--brun); border: 1px solid rgba(74,46,26,0.2); }
+
+  .ark {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--hvit);
+    border-radius: 8px;
+    border: 1px solid rgba(74,46,26,0.1);
+    overflow: hidden;
+  }
+  .ark-header {
+    background: var(--navy);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .ark-header-tittel {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--hvit);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .ark-header-sub { font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
+  .dato-stor { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--sand); line-height: 1; }
+  .dato-liten { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.2rem; text-align: right; }
+
+  .navn-rad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background: var(--sand-lys);
+    border-bottom: 1px solid rgba(74,46,26,0.08);
+  }
+  .felt-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brun); margin-bottom: 0.4rem; }
+  .felt-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid rgba(74,46,26,0.3);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+    color: var(--tekst);
+    outline: none;
+  }
+  .felt-input:focus { border-bottom-color: var(--navy); }
+
+  .seksjon-ingress {
+    padding: 1.2rem 2rem;
+    background: rgba(26,42,74,0.04);
+    border-bottom: 1px solid rgba(74,46,26,0.08);
+    border-left: 4px solid var(--navy);
+    font-size: 0.85rem;
+    color: var(--tekst-lys);
+    line-height: 1.65;
+  }
+
+  .sporsmal-liste { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .sporsmal-item { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.75rem; align-items: start; }
+  .sporsmal-nr {
+    width: 1.5rem; height: 1.5rem;
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .sporsmal-tekst { font-size: 0.88rem; color: var(--navy); font-weight: 500; line-height: 1.5; margin-bottom: 0.5rem; }
+  .svar-felt {
+    width: 100%;
+    min-height: 72px;
+    border: 1px solid rgba(74,46,26,0.15);
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--tekst);
+    background: #fafaf8;
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+  .svar-felt:focus { border-color: var(--navy); background: var(--hvit); }
+
+  .ark-footer {
+    padding: 1rem 2rem;
+    border-top: 1px solid rgba(74,46,26,0.08);
+    font-size: 0.72rem;
+    color: var(--tekst-lys);
+    text-align: center;
+    background: var(--sand-lys);
+  }
+
+  @media print {
+    @page { size: A4; margin: 15mm 18mm; }
+    body { background: white; padding: 0; }
+    .skjerm-topp { display: none !important; }
+    .ark { border: none; border-radius: 0; }
+    .ark-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .navn-rad { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .seksjon-ingress { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .sporsmal-nr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .svar-felt {
+      border: none;
+      border-bottom: 1px solid #bbb;
+      border-radius: 0;
+      background: transparent;
+      min-height: 60px;
+      resize: none;
+    }
+    .ark-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="skjerm-topp">
+  <div class="skjerm-info">
+    <strong>Spor A – Gjennomgang av surveyrapporten</strong>
+    <p>Fyll inn svarene dine digitalt, eller skriv ut og fyll inn for hånd.</p>
+  </div>
+  <div class="knapper">
+    <button class="knapp knapp-nullstill" onclick="nullstill()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6.5a4.5 4.5 0 1 1 1.2 3M2 10V6.5h3.5"/></svg>
+      Nullstill
+    </button>
+    <button class="knapp knapp-print" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9v2h9V9M6.5 1v7M4 6l2.5 2.5L9 6"/></svg>
+      Skriv ut / PDF
+    </button>
+  </div>
+</div>
+
+<div class="ark">
+  <div class="ark-header">
+    <div>
+      <div class="ark-header-tittel">Spor A – Gjennomgang av surveyrapporten</div>
+      <div class="ark-header-sub">Digitalpedagog-nettverk Nordmøre · Samling 5</div>
+    </div>
+    <div>
+      <div class="dato-stor">17. jun</div>
+      <div class="dato-liten">Tirsdag 2026</div>
+    </div>
+  </div>
+
+  <div class="navn-rad">
+    <div>
+      <div class="felt-label">Navn</div>
+      <input class="felt-input" type="text" placeholder="Skriv navn her">
+    </div>
+    <div>
+      <div class="felt-label">Enhet / skole / barnehage</div>
+      <input class="felt-input" type="text" placeholder="Navn på enhet">
+    </div>
+  </div>
+
+  <div class="seksjon-ingress">
+    Du har rapporten fra din enhet. Gå igjennom den og bruk disse spørsmålene som guide for å forstå hva dataene forteller deg.
+  </div>
+
+  <div class="sporsmal-liste">
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">1</div>
+      <div>
+        <div class="sporsmal-tekst">Førsteinntrykk – hva slår deg når du ser rapporten?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">2</div>
+      <div>
+        <div class="sporsmal-tekst">Hva er enhetens styrker?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">3</div>
+      <div>
+        <div class="sporsmal-tekst">Ansatte sine holdninger – hva viser rapporten?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">4</div>
+      <div>
+        <div class="sporsmal-tekst">Ansatte sine opplevde kompetanse – hva viser rapporten?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">5</div>
+      <div>
+        <div class="sporsmal-tekst">Ansattes opplevde ferdigheter – hva viser rapporten?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+    <div class="sporsmal-item">
+      <div class="sporsmal-nr">6</div>
+      <div>
+        <div class="sporsmal-tekst">Ansattes bruk – hva viser rapporten?</div>
+        <textarea class="svar-felt" placeholder="Skriv her..."></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ark-footer">
+    Digitalpedagog-nettverk Nordmøre · NTNU / DMMH · Mari-Ann Letnes og Cecilie Skaalvik
+  </div>
+</div>
+
+<script>
+  function nullstill() {
+    if (!confirm('Nullstille alle svar?')) return;
+    document.querySelectorAll('.svar-felt, .felt-input').forEach(el => el.value = '');
+  }
+</script>
+</body>
+</html>
