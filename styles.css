@@ -710,6 +710,9 @@ footer strong { color: rgba(200,169,122,0.8); }
   padding: 2rem 2.5rem;
   transition: box-shadow 0.2s;
 }
+.aar-kort * {
+  text-decoration: none;
+}
 .aar-kort:hover {
   box-shadow: 0 6px 24px rgba(74,46,26,0.1);
 }
