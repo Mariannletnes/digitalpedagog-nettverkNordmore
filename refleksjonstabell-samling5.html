@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refleksjonstabell · Samling 5 · 17. juni 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2a4a;
+    --brun: #4a2e1a;
+    --sand: #c8a97a;
+    --sand-lys: #f5ede0;
+    --gronn: #3a6a5a;
+    --krem: #f7f2ec;
+    --tekst: #2d2318;
+    --tekst-lys: #6a5a48;
+    --hvit: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--krem);
+    color: var(--tekst);
+    padding: 2.5rem 2rem;
+  }
+
+  /* Skjermtopp */
+  .skjerm-topp {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .skjerm-info strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.2rem;
+  }
+  .skjerm-info p { font-size: 0.82rem; color: var(--tekst-lys); line-height: 1.5; }
+  .knapper { display: flex; gap: 0.6rem; flex-shrink: 0; }
+  .knapp {
+    border: none;
+    border-radius: 100px;
+    padding: 0.6rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .knapp:hover { opacity: 0.85; }
+  .knapp-print { background: var(--navy); color: white; box-shadow: 0 4px 16px rgba(26,42,74,0.2); }
+  .knapp-nullstill { background: var(--hvit); color: var(--brun); border: 1px solid rgba(74,46,26,0.2); }
+
+  /* Ark */
+  .ark {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--hvit);
+    border-radius: 8px;
+    border: 1px solid rgba(74,46,26,0.1);
+    overflow: hidden;
+  }
+
+  /* Header */
+  .ark-header {
+    background: var(--navy);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .ark-header-tittel {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--hvit);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .ark-header-sub { font-size: 0.75rem; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
+  .dato-stor { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--sand); line-height: 1; }
+  .dato-liten { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.2rem; text-align: right; }
+
+  /* Navn */
+  .navn-rad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background: var(--sand-lys);
+    border-bottom: 1px solid rgba(74,46,26,0.08);
+  }
+  .felt-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brun); margin-bottom: 0.4rem; }
+  .felt-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid rgba(74,46,26,0.3);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+    color: var(--tekst);
+    outline: none;
+  }
+  .felt-input:focus { border-bottom-color: var(--navy); }
+
+  /* Tabell-seksjon */
+  .tabell-seksjon { padding: 1.8rem 2rem; }
+  .tabell-seksjon + .tabell-seksjon {
+    border-top: 2px solid rgba(74,46,26,0.08);
+  }
+
+  .tabell-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--tekst-lys);
+    margin-bottom: 0.4rem;
+  }
+
+  .tabell-tittel {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .tabell-ingress {
+    font-size: 0.82rem;
+    color: var(--tekst-lys);
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+    max-width: 680px;
+  }
+
+  /* Selve tabellen */
+  .refleksjons-tabell {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgba(74,46,26,0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.85rem;
+  }
+
+  .refleksjons-tabell thead tr {
+    background: var(--navy);
+  }
+
+  .refleksjons-tabell thead th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .refleksjons-tabell thead th:last-child { border-right: none; }
+  .refleksjons-tabell thead th.th-kategori { width: 140px; color: rgba(255,255,255,0.45); }
+
+  .refleksjons-tabell tbody tr:nth-child(even) { background: var(--krem); }
+  .refleksjons-tabell tbody tr:nth-child(odd) { background: var(--hvit); }
+
+  .refleksjons-tabell td {
+    padding: 0.85rem 1rem;
+    border-right: 1px solid rgba(74,46,26,0.08);
+    border-top: 1px solid rgba(74,46,26,0.08);
+    vertical-align: top;
+  }
+  .refleksjons-tabell td:last-child { border-right: none; }
+
+  .td-kategori {
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    width: 140px;
+  }
+
+  .svar-celle {
+    width: 100%;
+    min-height: 70px;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--tekst);
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+    width: 100%;
+    display: block;
+  }
+  .svar-celle::placeholder { color: rgba(106,90,72,0.35); font-style: italic; }
+  .svar-celle:focus { background: rgba(200,169,122,0.06); border-radius: 2px; }
+
+  /* Barnehage: grønn header-stripe */
+  .bhg .refleksjons-tabell thead tr { background: var(--gronn); }
+  .bhg .tabell-tittel { color: var(--gronn); }
+
+  /* Skole: navy header-stripe */
+  .skole .refleksjons-tabell thead tr { background: var(--navy); }
+  .skole .tabell-tittel { color: var(--navy); }
+
+  /* Footer */
+  .ark-footer {
+    padding: 1rem 2rem;
+    border-top: 1px solid rgba(74,46,26,0.08);
+    font-size: 0.72rem;
+    color: var(--tekst-lys);
+    text-align: center;
+    background: var(--sand-lys);
+  }
+
+  /* PRINT */
+  @media print {
+    @page { size: A4 landscape; margin: 12mm 15mm; }
+    body { background: white; padding: 0; }
+    .skjerm-topp { display: none !important; }
+    .ark { border: none; border-radius: 0; }
+    .ark-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .navn-rad { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .refleksjons-tabell thead tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .refleksjons-tabell tbody tr:nth-child(even) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .svar-celle { min-height: 55px; }
+    .tabell-seksjon { page-break-inside: avoid; }
+    .ark-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="skjerm-topp">
+  <div class="skjerm-info">
+    <strong>Refleksjonstabell · Samling 5</strong>
+    <p>Fyll inn i tabellene på nett, eller skriv ut og fyll inn for hånd.</p>
+  </div>
+  <div class="knapper">
+    <button class="knapp knapp-nullstill" onclick="nullstill()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6.5a4.5 4.5 0 1 1 1.2 3M2 10V6.5h3.5"/></svg>
+      Nullstill
+    </button>
+    <button class="knapp knapp-print" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 9v2h9V9M6.5 1v7M4 6l2.5 2.5L9 6"/></svg>
+      Skriv ut / PDF
+    </button>
+  </div>
+</div>
+
+<div class="ark">
+
+  <div class="ark-header">
+    <div>
+      <div class="ark-header-tittel">Refleksjonstabell · Samling 5</div>
+      <div class="ark-header-sub">Digitalpedagog-nettverk Nordmøre · Campus DevoldHolmen</div>
+    </div>
+    <div>
+      <div class="dato-stor">17. jun</div>
+      <div class="dato-liten">Tirsdag 2026</div>
+    </div>
+  </div>
+
+  <div class="navn-rad">
+    <div>
+      <div class="felt-label">Navn</div>
+      <input class="felt-input" type="text" placeholder="Skriv navn her">
+    </div>
+    <div>
+      <div class="felt-label">Enhet / skole / barnehage</div>
+      <input class="felt-input" type="text" placeholder="Navn på enhet">
+    </div>
+  </div>
+
+  <!-- BARNEHAGE -->
+  <div class="tabell-seksjon bhg">
+    <div class="tabell-label">Barnehage</div>
+    <div class="tabell-tittel">Hva har festet seg i praksis?</div>
+    <p class="tabell-ingress">For barnehagen handler denne samlingen om å se hva som har festet seg: Hva bruker personalet nå som de ikke brukte før? Hva har barna fått tilgang til gjennom nettverksåret?</p>
+
+    <table class="refleksjons-tabell">
+      <thead>
+        <tr>
+          <th class="th-kategori">Kategori</th>
+          <th>Har vi klart å forankre ny praksis i hele personalgruppen?</th>
+          <th>Hva ønsker vi å vise fram på fagdagen?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-kategori">Muligheter</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Barrierer</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Dette gjør vi i dag</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Dette vil vi</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SKOLE -->
+  <div class="tabell-seksjon skole">
+    <div class="tabell-label">Skole</div>
+    <div class="tabell-tittel">Hva har endret seg?</div>
+    <p class="tabell-ingress">For skolen handler samlingen om å se sammenhengen mellom situasjonsanalysen fra samling 1 og der enheten er nå. Hva er faktisk endret – og hva trenger mer tid inn i neste år?</p>
+
+    <table class="refleksjons-tabell">
+      <thead>
+        <tr>
+          <th class="th-kategori">Kategori</th>
+          <th>Hva er de viktigste funnene fra ståstedsanalysen i vår enhet?</th>
+          <th>Hva er digitalpedagogens rolle videre i nettverket?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-kategori">Muligheter</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Barrierer</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Dette gjør vi i dag</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+        <tr>
+          <td class="td-kategori">Dette vil vi</td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+          <td><textarea class="svar-celle" placeholder="Skriv her..."></textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ark-footer">
+    Digitalpedagog-nettverk Nordmøre · NTNU / DMMH · Mari-Ann Letnes og Cecilie Skaalvik
+  </div>
+
+</div>
+
+<script>
+  function nullstill() {
+    if (!confirm('Nullstille alle svar?')) return;
+    document.querySelectorAll('.svar-celle, .felt-input').forEach(el => el.value = '');
+  }
+</script>
+
+</body>
+</html>
