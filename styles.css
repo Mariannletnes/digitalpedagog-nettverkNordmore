@@ -691,3 +691,84 @@ footer strong { color: rgba(200,169,122,0.8); }
   .nav-links { display: none; }
   nav { padding: 0 1rem; }
 }
+
+/* ── Årskorter (nettverkssamlinger) ── */
+.aar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.aar-kort {
+  display: block;
+  text-decoration: none;
+  color: var(--tekst);
+  background: var(--hvit);
+  border: 1px solid rgba(74,46,26,0.1);
+  border-top: 4px solid var(--brun);
+  border-radius: 8px;
+  padding: 2rem 2.5rem;
+  transition: box-shadow 0.2s;
+}
+.aar-kort:hover {
+  box-shadow: 0 6px 24px rgba(74,46,26,0.1);
+}
+.aar-kort-topp {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.aar-tall {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.aar-antall {
+  font-size: 0.8rem;
+  color: var(--brun);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--sand-lysere);
+  border: 1px solid rgba(74,46,26,0.1);
+  padding: 0.2rem 0.65rem;
+  border-radius: 2px;
+}
+.aar-fase {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brun-lys);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+.aar-ingress {
+  color: var(--tekst-lys);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 760px;
+  margin-bottom: 1.2rem;
+}
+.aar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.2rem;
+}
+.aar-tags span {
+  font-size: 0.72rem;
+  background: var(--sand-lysere);
+  color: var(--brun);
+  padding: 0.2rem 0.65rem;
+  border-radius: 2px;
+  border: 1px solid rgba(74,46,26,0.1);
+  font-weight: 500;
+}
+.aar-pil {
+  font-size: 0.82rem;
+  color: var(--brun);
+  font-weight: 500;
+}
