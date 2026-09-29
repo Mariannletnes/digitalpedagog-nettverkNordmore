@@ -81,6 +81,91 @@
     max-width: 560px;
     margin: 0 auto;
   }
+  /* Aktivitetsgrid */
+  .aktivitet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .aktivitet-kort {
+    background: var(--hvit);
+    border-radius: 6px;
+    padding: 1.4rem 1.5rem;
+    border-top: 3px solid var(--brun);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.45s, transform 0.45s, box-shadow 0.2s;
+    border: 1px solid rgba(74,46,26,0.1);
+    border-top: 3px solid var(--brun);
+  }
+  .aktivitet-kort.synlig { opacity: 1; transform: translateY(0); }
+  .aktivitet-kort:hover { box-shadow: 0 6px 24px rgba(74,46,26,0.12); transform: translateY(-2px); }
+
+  .ak-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--brun-lys);
+    margin-bottom: 0.5rem;
+  }
+  .ak-dato {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .ak-tittel {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--brun);
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+  .ak-meta {
+    font-size: 0.8rem;
+    color: var(--tekst-lys);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .ak-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+  }
+  .ak-tag {
+    font-size: 0.64rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: var(--sand-lysere);
+    color: var(--brun);
+    padding: 0.14rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid rgba(74,46,26,0.1);
+  }
+  .ak-pil {
+    font-size: 0.82rem;
+    color: var(--brun);
+    margin-top: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* Farger per type */
+  .type-samling { border-top-color: var(--navy); }
+  .type-samling .ak-type { color: var(--navy); }
+  .type-teams { border-top-color: #2a5a9a; }
+  .type-teams .ak-type { color: #2a5a9a; }
+
+  @media (max-width: 700px) {
+    .aktivitet-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -114,9 +199,22 @@
 </div>
 
 <div class="container">
-  <div class="kommer-boks">
-    <h2>Samlinger kommer</h2>
-    <p>Programmet for 2026–2027 er under planlegging. Siden oppdateres når datoer og innhold er klart. Nettverket fortsetter å samle skole og barnehage i Nordmøre-regionen til felles faglig utvikling.</p>
+  <div class="aktivitet-grid">
+
+    <a class="aktivitet-kort type-samling" href="samling-6.html">
+      <div class="ak-type">Samling · DevoldHolmen</div>
+      <div class="ak-dato">30. sep 2026</div>
+      <div class="ak-tittel">Hva styrer undervisningen – og hva styrer nettverket?</div>
+      <div class="ak-meta">Redefinering av nettverket, Goodlads fem læreplannivåer og teach-meet om hva som fungerer og hva som er utfordrende.</div>
+      <div class="ak-tags">
+        <span class="ak-tag">Goodlad</span>
+        <span class="ak-tag">Læreplanarbeid</span>
+        <span class="ak-tag">Læringsnettverk</span>
+        <span class="ak-tag">Teach-meet</span>
+      </div>
+      <div class="ak-pil">Les mer →</div>
+    </a>
+
   </div>
 </div>
 
@@ -124,6 +222,13 @@
   <strong>Digitalpedagog-nettverk Nordmøre</strong><br>
   I samarbeid med NTNU og DMMH · Mari-Ann Letnes og Cecilie Skaalvik
 </footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => {
+    if (x.isIntersecting) x.target.classList.add('synlig');
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.aktivitet-kort').forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>

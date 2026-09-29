@@ -3,163 +3,849 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oppstart: Hva er Digitalpedagog? · Digitalpedagog-nettverk Nordmøre</title>
+<title>Hva styrer undervisningen? · Digitalpedagog-nettverk Nordmøre</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ── Fargesatte kortvarianter (som samling 5) ── */
+  .kort-sand {
+    background: linear-gradient(135deg, #f5ede0 0%, #fff 60%);
+    border: 1px solid rgba(200,169,122,0.3);
+    border-top: 4px solid var(--sand);
+  }
+  .kort-navy {
+    background: linear-gradient(135deg, #eef1f7 0%, #fff 60%);
+    border: 1px solid rgba(26,42,74,0.15);
+    border-top: 4px solid var(--navy);
+  }
+  .kort-gronn {
+    background: linear-gradient(135deg, #eef4f1 0%, #fff 60%);
+    border: 1px solid rgba(58,106,90,0.2);
+    border-top: 4px solid var(--gronn);
+  }
+  .kort-brun {
+    background: linear-gradient(135deg, #f5ede0 0%, #fff 60%);
+    border: 1px solid rgba(74,46,26,0.15);
+    border-top: 4px solid var(--brun);
+  }
 
+  .two-col-stretch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    align-items: stretch;
+  }
+  .two-col-stretch > * { margin-bottom: 0 !important; }
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .seksjon-stripe {
+    padding: 0.6rem 2rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 2.5rem 0 0.5rem;
+  }
+  .stripe-sand { background: var(--sand); color: var(--brun); }
+  .stripe-navy { background: var(--navy); color: rgba(255,255,255,0.8); }
+  .stripe-gronn { background: var(--gronn); color: rgba(255,255,255,0.85); }
+  .stripe-brun { background: var(--brun); color: rgba(255,255,255,0.8); }
+
+  .liten-etikett {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brun-lys);
+    margin-bottom: 0.4rem;
+  }
+
+  /* ── Kjennetegn på læringsnettverk ── */
+  .kjennetegn { list-style: none; counter-reset: kj; margin-top: 0.5rem; }
+  .kjennetegn li {
+    counter-increment: kj;
+    position: relative;
+    padding: 0.85rem 0 0.85rem 3rem;
+    border-top: 1px solid rgba(74,46,26,0.08);
+  }
+  .kjennetegn li:first-child { border-top: none; }
+  .kjennetegn li::before {
+    content: counter(kj);
+    position: absolute;
+    left: 0; top: 0.8rem;
+    width: 2rem; height: 2rem;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--hvit);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .kjennetegn strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    color: var(--navy);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+  .kjennetegn span { color: var(--tekst-lys); font-size: 0.88rem; line-height: 1.65; }
+
+  /* ── Goodlad: mørkt introfelt ── */
+  .goodlad-hero {
+    background: linear-gradient(150deg, #0e1a2e 0%, var(--navy) 45%, #2a1a0e 100%);
+    color: var(--hvit);
+    border-radius: 10px;
+    padding: 2.75rem 2.5rem 2.25rem;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .goodlad-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.05;
+    background-image: repeating-linear-gradient(45deg, var(--sand) 0px, var(--sand) 1px, transparent 1px, transparent 40px);
+    pointer-events: none;
+  }
+  .goodlad-hero > * { position: relative; }
+  .goodlad-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 0.6rem;
+  }
+  .goodlad-tittel {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15;
+    margin-bottom: 0.9rem;
+  }
+  .goodlad-tittel em { color: var(--sand); font-style: italic; }
+  .goodlad-ingress {
+    max-width: 720px;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.96rem;
+    line-height: 1.75;
+  }
+  .goodlad-kilde {
+    margin-top: 0.9rem;
+    font-size: 0.78rem;
+    color: rgba(200,169,122,0.75);
+  }
+
+  /* ── Trappen ── */
+  .trapp {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: end;
+    gap: 0.5rem;
+    margin-top: 2.25rem;
+  }
+  .trinn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none;
+    border-radius: 6px 6px 0 0;
+    padding: 0.9rem 0.9rem 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .trinn:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+  .trinn-nr {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.55;
+    margin-bottom: 0.35rem;
+  }
+  .trinn-navn {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: 0.3rem;
+  }
+  .trinn-hvem { font-size: 0.74rem; line-height: 1.4; opacity: 0.8; }
+  .t1 { height: 150px; background: var(--sand-lys);  color: var(--brun); }
+  .t2 { height: 185px; background: var(--sand);      color: var(--brun); }
+  .t3 { height: 220px; background: var(--brun-lys);  color: var(--hvit); }
+  .t4 { height: 255px; background: var(--brun);      color: var(--hvit); }
+  .t5 { height: 290px; background: var(--hvit);      color: var(--navy); }
+  .trapp-pil {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    border-top: 1px solid rgba(200,169,122,0.35);
+    padding-top: 0.6rem;
+  }
+
+  /* ── Nivåkort ── */
+  .niva {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    background: var(--hvit);
+    border: 1px solid rgba(74,46,26,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    scroll-margin-top: 80px;
+  }
+  .niva-side { padding: 1.5rem 1.25rem; }
+  .niva-side .nr {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .niva-side .navn {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin-top: 0.4rem;
+  }
+  .niva-side .hvem {
+    font-size: 0.78rem;
+    margin-top: 0.7rem;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+  .n1 .niva-side { background: var(--sand-lys);  color: var(--brun); }
+  .n2 .niva-side { background: var(--sand);      color: var(--brun); }
+  .n3 .niva-side { background: var(--brun-lys);  color: var(--hvit); }
+  .n4 .niva-side { background: var(--brun);      color: var(--hvit); }
+  .n5 .niva-side { background: var(--navy);      color: var(--hvit); }
+  .niva-innhold { padding: 1.5rem 1.75rem; }
+  .niva-innhold > p {
+    color: var(--tekst-lys);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 0.6rem;
+  }
+  .niva-innhold h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin: 1.2rem 0 0.5rem;
+  }
+  .digital-linse {
+    background: #eef3f8;
+    border: 1px solid #b8cfe0;
+    border-left: 4px solid var(--navy-lys);
+    border-radius: 4px;
+    padding: 0.85rem 1.1rem;
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+  .digital-linse b {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .spor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .spor .mini-box h3 { margin-top: 0; }
+  .spor-skole { background: #eef3f8; border-color: #b8cfe0; }
+  .spor-skole h3 { color: var(--navy) !important; }
+  .spor-bhg { background: #eef4f1; border-color: #b0d4c4; }
+  .spor-bhg h3 { color: var(--gronn) !important; }
+  .spor .question-list li { font-size: 0.86rem; }
+  .felles-oppgave {
+    background: var(--sand-lysere);
+    border-left: 4px solid var(--sand);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    margin-top: 1rem;
+  }
+  .felles-oppgave .liten-etikett { color: var(--brun); }
+  .felles-oppgave p, .felles-oppgave li { color: var(--tekst); font-size: 0.9rem; line-height: 1.7; }
+  .felles-oppgave ul { padding-left: 1.2rem; }
+
+  /* ── Walk and talk ── */
+  .walk-talk {
+    background: linear-gradient(150deg, #0e1a2e 0%, var(--navy) 55%, #2a1a0e 100%);
+    color: var(--hvit);
+    border-radius: 8px;
+    padding: 1.5rem 1.6rem;
+    margin-top: 1.2rem;
+  }
+  .walk-topp { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.8rem; color: var(--sand); }
+  .walk-tittel { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--hvit); line-height: 1.25; }
+  .walk-talk > p { color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.7; }
+  .walk-etapper { list-style: none; counter-reset: et; margin-top: 1rem; }
+  .walk-etapper li {
+    counter-increment: et;
+    position: relative;
+    padding: 0.2rem 0 1rem 2.6rem;
+    color: rgba(255,255,255,0.92);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    border-left: 2px dashed rgba(200,169,122,0.45);
+    margin-left: 0.9rem;
+  }
+  .walk-etapper li:last-child { border-left-color: transparent; padding-bottom: 0.2rem; }
+  .walk-etapper li::before {
+    content: counter(et);
+    position: absolute;
+    left: -0.95rem; top: 0;
+    width: 1.8rem; height: 1.8rem;
+    border-radius: 50%;
+    background: var(--sand);
+    color: var(--brun);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .walk-etapper span {
+    display: block;
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 0.1rem;
+  }
+  .menti-boks {
+    margin-top: 1.2rem;
+    background: var(--hvit);
+    border: 1px solid rgba(58,106,90,0.25);
+    border-top: 4px solid var(--gronn);
+    border-radius: 6px;
+    padding: 0.9rem 0.9rem 0.6rem;
+    scroll-margin-top: 80px;
+  }
+  .menti-boks .liten-etikett { color: var(--gronn); }
+  .walk-retur {
+    margin-top: 1rem;
+    background: rgba(200,169,122,0.14);
+    border-left: 4px solid var(--sand);
+    border-radius: 4px;
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.6;
+  }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .chip {
+    font-size: 0.76rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    background: var(--hvit);
+    border: 1px solid rgba(74,46,26,0.18);
+    color: var(--brun);
+  }
+  .chip-skole { border-color: #b8cfe0; color: var(--navy); background: #f6f9fc; }
+  .chip-bhg { border-color: #b0d4c4; color: var(--gronn); background: #f5faf7; }
+
+  .sitat-inline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--brun);
+    border-left: 3px solid var(--sand);
+    padding: 0.2rem 0 0.2rem 1rem;
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+
+  .kilder { font-size: 0.82rem; color: var(--tekst-lys); line-height: 1.7; padding-left: 1.2rem; }
+  .kilder li { margin-bottom: 0.4rem; }
+
+  @media (max-width: 860px) {
+    .two-col-stretch, .spor, .three-col { grid-template-columns: 1fr; }
+    .niva { grid-template-columns: 1fr; }
+    .niva-side { display: flex; align-items: baseline; gap: 0.9rem; flex-wrap: wrap; padding: 1rem 1.25rem; }
+    .niva-side .nr { font-size: 2rem; }
+    .niva-side .navn { margin-top: 0; }
+    .niva-side .hvem { flex-basis: 100%; margin-top: 0; }
+    .niva-innhold { padding: 1.25rem; }
+    .goodlad-hero { padding: 2rem 1.25rem 1.5rem; }
+    .trapp { grid-template-columns: 1fr; gap: 0.35rem; }
+    .trinn { height: auto !important; border-radius: 4px; padding: 0.7rem 0.9rem; flex-direction: row; justify-content: flex-start; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+    .t1 { margin-right: 20%; } .t2 { margin-right: 15%; } .t3 { margin-right: 10%; } .t4 { margin-right: 5%; }
+    .trinn-nr { font-size: 1.3rem; margin: 0; }
+    .trinn-navn { margin: 0; }
+    .trinn-hvem { flex-basis: 100%; }
+    .trapp-pil { display: none; }
+    .seksjon-stripe { padding: 0.6rem 1rem; }
+  }
+</style>
 </head>
 <body>
+
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html">Digitalpedagog-nettverk Nordmøre</a>
+    <a class="nav-logo" href="index.html">Digitalpedagog Nettverk-Nordmøre</a>
     <ul class="nav-links">
       <li><a href="index.html#om">Om nettverket</a></li>
       <li><a href="index.html#samlinger">Samlinger</a></li>
       <li><a href="index.html#temaer">Temaer</a></li>
-      <li>
-        <a href="index.html" class="nav-home" title="Til forsiden" aria-label="Til forsiden">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/>
-            <polyline points="9 21 9 12 15 12 15 21"/>
-          </svg>
-        </a>
-      </li>
+      <li><a href="index.html" class="nav-home" title="Til forsiden" aria-label="Til forsiden"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 12 15 12 15 21"/></svg></a></li>
     </ul>
   </div>
 </nav>
 
 <section class="detail-hero">
   <div class="container">
-    <div class="detail-meta">S1 · 25. september 2025 · Campus DevoldHolmen</div>
-    <h1 class="detail-title">Oppstart: Hva er Digitalpedagog?</h1>
-    <p class="detail-summary">Prosjektinnramming, ståsted, erfaringer og introduksjon til profesjonsfaglig digital kompetanse. Samlingen la grunnlaget for videre arbeid med lokal forankring, felles refleksjon og utvikling av digital praksis i skole og barnehage.</p>
+    <div class="detail-meta">S6 · Onsdag 30. september 2026 · Campus DevoldHolmen · Andre nettverksår</div>
+    <h1 class="detail-title">Hva styrer undervisningen – og hva styrer nettverket?</h1>
+    <p class="detail-summary">Første samling i det andre nettverksåret. Vi ser på hva nettverket skal være videre, og bruker John Goodlads fem læreplannivåer til å undersøke hva som faktisk styrer det fagdidaktiske arbeidet i skolen og arbeidet med fagområdene i barnehagen – fra ideene i samfunnsdebatten til det barn og elever faktisk erfarer.</p>
     <div class="taglist">
-      <span class="tag">Ståstedsanalyse</span>
+      <span class="tag">Goodlad</span>
+      <span class="tag">Læreplanarbeid</span>
+      <span class="tag">Rammeplan</span>
+      <span class="tag">Signaturpedagogikk</span>
+      <span class="tag">Læringsnettverk</span>
+      <span class="tag">Teach-meet</span>
       <span class="tag">PfDK</span>
-      <span class="tag">Digitalpedagog</span>
-      <span class="tag">Gruppearbeid</span>
-      <span class="tag">Refleksjon</span>
     </div>
   </div>
 </section>
 
-<section class="detail-section">
-  <div class="container detail-grid">
-    <div>
-      <section class="program">
-        <div class="program-header">Program</div>
-        <div class="program-row"><div class="program-time">09.15–09.30</div><div class="program-text">Velkommen</div></div>
-        <div class="program-row"><div class="program-time">09.30–10.30</div><div class="program-text">Hva er Digitalpedagog? Prosjektinnramming og erfaringer fra tidligere kompetanseutviklingsprosjekter</div></div>
-        <div class="program-row"><div class="program-time">10.30–10.45</div><div class="program-text">Pause</div></div>
-        <div class="program-row"><div class="program-time">10.45–12.00</div><div class="program-text">Ståsted og erfaringer, individuelt og i gruppe</div></div>
-        <div class="program-row"><div class="program-time">11.30–12.15</div><div class="program-text">Lunsj</div></div>
-        <div class="program-row"><div class="program-time">12.15–14.00</div><div class="program-text">PfDK, introduksjon, gruppearbeid og plenum</div></div>
-        <div class="program-row"><div class="program-time">14.00–14.15</div><div class="program-text">Pause</div></div>
-        <div class="program-row"><div class="program-time">14.15–15.20</div><div class="program-text">Ståstedsanalyse og planlegging av lokal kompetanseutvikling</div></div>
-        <div class="program-row"><div class="program-time">15.20–15.30</div><div class="program-text">Oppsummering og til neste gang</div></div>
-      </section>
+<div class="container">
 
-      <div class="detail-card">
-        <h2>Om samlingen</h2>
-        <p>Denne første samlingen etablerte rammen for nettverket. Deltakerne arbeidet med hvordan digitalisering preger skole og barnehage, hvordan mediedebatten påvirker profesjonsutøvelsen, og hvordan profesjonsfaglig digital kompetanse kan forstås som mer enn teknisk ferdighet.</p>
-        <p>Samlingen løftet fram behovet for situasjonsanalyse, felles mål, kollektive læringsprosesser og lokal forankring. Den åpnet også for refleksjon om hva som regnes som god digital praksis i den enkelte enhet.</p>
+  <div class="two-col-stretch" style="margin-top: 0;">
+    <div class="detail-card kort-navy">
+      <h2>Om samlingen</h2>
+      <p>Det første nettverksåret ga oss et felles språk for profesjonsfaglig digital kompetanse, endringsledelse, estetikk og KI. Nå tar vi et steg tilbake og spør: Hva skal nettverket være fremover, og hvordan blir det et <em>læringsnettverk</em> – ikke bare et sted for å dele historier?</p>
+      <p>Hoveddelen av dagen handler om læreplanarbeid. Med Goodlads fem læreplannivåer som verktøy undersøker vi sammenhengen mellom samfunnsdebatt, læreplan og rammeplan, egne oppfatninger, konkret praksis og det barn og elever sitter igjen med – og hva som skjer når digitale læreverk, plattformer og KI kommer inn i bildet.</p>
+    </div>
+    <div class="detail-card kort-sand">
+      <h2>Forarbeid</h2>
+      <p>Barnehage og skole har samme forarbeid:</p>
+      <ul class="question-list" style="margin-top: 0.5rem;">
+        <li>Forbered en teach-meet på tre minutter: Hva har dere gjort eller planlagt å gjøre med surveyen – og/eller et tips knyttet til digitale ressurser. <strong>Hva har du lykkes med, og hva har vært utfordringene?</strong></li>
+        <li>Send inn problemstillinger dere ønsker å arbeide med på samlingen til Cecilie Skaalvik innen 23. september.</li>
+      </ul>
+      <div class="note-box">
+        Påmeldingsfrist var fredag 25. september.
       </div>
+    </div>
+  </div>
 
-      <div class="prompt-card">
-        <h2>Refleksjonsspørsmål</h2>
-        <ul class="question-list">
-          <li>Hva regner vi som god digital praksis hos oss?</li>
-          <li>Hvordan påvirker mediedebatten måten vi snakker om teknologi på i profesjonsfellesskapet?</li>
-          <li>Hvilke styrker har vi allerede i personalet, og hvor ser vi behov for videre utvikling?</li>
-          <li>Hvilke digitale praksiser opplever vi som pedagogisk meningsfulle, og hvilke bruker vi mest av vane?</li>
-          <li>Hva trenger vi å forstå bedre før vi kan sette gode mål for videre arbeid?</li>
-        </ul>
-      </div>
+  <!-- Program -->
+  <div class="program-split" style="margin-top: 1.5rem;">
+    <div class="program-split-header">
+      <div>Onsdag 30.09</div>
+      <div>Skole</div>
+      <div>Barnehage</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">09.15–10.00</div>
+      <div class="col-skole">Siden sist · Redefinering av nettverket</div>
+      <div class="col-bhg">Siden sist · Redefinering av nettverket</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">10.00–10.15</div>
+      <div class="col-felles">Pause</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">10.15–12.00</div>
+      <div class="col-skole"><strong>Hva styrer mitt fagdidaktiske arbeid?</strong><br>Goodlads fem læreplannivåer</div>
+      <div class="col-bhg"><strong>Hva styrer mitt arbeid med fagområdene?</strong><br>Goodlads fem læreplannivåer</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">12.00–13.00</div>
+      <div class="col-felles">Lunsj</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">13.00–14.15</div>
+      <div class="col-skole">Erfaringsdeling (teach-meet) – hva fungerer, hva er utfordringer?</div>
+      <div class="col-bhg">Erfaringsdeling (teach-meet) – hva fungerer, hva er utfordringer?</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">14.15–14.30</div>
+      <div class="col-felles">Pause</div>
+    </div>
+    <div class="program-split-row">
+      <div class="col-tid">14.30–15.00</div>
+      <div class="col-skole">Avslutning og veien videre – hva ønsker vi neste gang?</div>
+      <div class="col-bhg">Avslutning og veien videre – hva ønsker vi neste gang?</div>
+    </div>
+  </div>
 
-      <div class="two-col">
-        <div class="mini-box">
-          <h3>Barnehage</h3>
-          <p>For barnehagen kan samlingen åpne for refleksjon om hvordan digital teknologi kan støtte lek, utforsking, omsorg, trivsel og medvirkning uten at teknologien styrer aktiviteten.</p>
-          <ul class="question-list">
-            <li>Hva kjennetegner god digital praksis i vår barnehage?</li>
-            <li>Når åpner digitale verktøy for lek, skaperglede og fellesskap?</li>
-            <li>Når tar teknologien for mye plass i barns hverdag?</li>
-            <li>Hvordan balanserer vi teknologiens muligheter med lekens egenverdi?</li>
-          </ul>
+  <!-- ═════════ SIDEN SIST OG REDEFINERING ═════════ -->
+  <div class="seksjon-stripe stripe-navy">Siden sist og redefinering av nettverket</div>
+
+  <div class="detail-card kort-navy" style="margin-top: 1rem;">
+    <h2>DigiPed = fagkompetanse × ledelse</h2>
+    <p>Det første nettverksåret beveget seg over tre kunnskapsområder. Rollen som digitalpedagog handler om å holde dem sammen – det er ikke nok å kunne teknologien eller pedagogikken hver for seg; man må også lede utviklingen i sitt eget kollegium.</p>
+    <div class="three-col">
+      <div class="mini-box">
+        <h3>Ledelse</h3>
+        <div class="chips">
+          <span class="chip">Hva er ledelse?</span><span class="chip">Digitalpedagogrollen</span><span class="chip">Rolle- og forventningsavklaring</span><span class="chip">Job-crafting</span><span class="chip">Ståstedsanalyser (survey)</span><span class="chip">Lokale prosjektbeskrivelser</span><span class="chip">Kompetansebegrepet</span>
         </div>
+      </div>
+      <div class="mini-box">
+        <h3>Teknologi</h3>
+        <div class="chips">
+          <span class="chip">KI</span><span class="chip">Book Creator</span><span class="chip">Custer og teknologiforståelse</span><span class="chip">Multimodal tekstskaping</span><span class="chip">Teach-meet</span>
+        </div>
+      </div>
+      <div class="mini-box">
+        <h3>Pedagogisk/didaktisk kunnskap</h3>
+        <div class="chips">
+          <span class="chip">Design for læring</span><span class="chip">Analoge vs. digitale arbeidsformer</span><span class="chip">SAMR</span><span class="chip">TPACK</span><span class="chip">Paneldebatt</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="mini-box">
+  <div class="two-col-stretch">
+    <div class="detail-card kort-sand">
+      <h2>Nettverket i en regional plan</h2>
+      <p>Utkastet til <strong>Regional kvalitets- og kompetanseutviklingsplan for Oppvekstnettverk Nordmøre 2026–2036</strong> («Sammen skaper vi fremtiden», utkast til vedtak 10.09.26) løfter profesjonsfaglig digital kompetanse som et eget nettverk for ansatte i barnehager og skoler, med DMMH og NTNU som fagmiljø – for hele tiårsperioden.</p>
+      <p>Det gir nettverket en ny forankring: arbeidet vårt blir en del av regionens langsiktige plan, ikke et enkeltstående prosjekt.</p>
+      <h3>Elevrådenes innspill til planen</h3>
+      <ul class="question-list">
+        <li>Mer praktisk undervisning</li>
+        <li>Programmering og digitale verktøy</li>
+        <li>Psykisk helse, følelser og mobbing</li>
+        <li>Bedre klasseledelse og elevforståelse</li>
+      </ul>
+    </div>
+    <div class="prompt-card kort-sand" style="margin-bottom: 0;">
+      <h2>Hva betyr det for oss?</h2>
+      <ul class="question-list">
+        <li>Hvordan kan vi videreutvikle og styrke nettverksgruppene?</li>
+        <li>Vi skal være et forum for å dele erfaringer og reflektere rundt ulike problemstillinger:
+          <ul style="padding-left: 1.1rem; margin-top: 0.3rem;">
+            <li>Hva fungerer? (presentasjoner, modellering osv.)</li>
+            <li>Hva er utfordrende? (diskusjoner, veiledning)</li>
+          </ul>
+        </li>
+        <li>Hvor stor plass skal faglige innlegg ha?</li>
+        <li>Skal nettverket bli mer deltakerstyrt – med mer medbestemmelse?</li>
+        <li>Mindre fokus på å gå i takt?</li>
+        <li>Mer basert på den enkelte enhets behov?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col-stretch">
+    <div class="detail-card kort-navy">
+      <h2>Hva kjennetegner et læringsnettverk?</h2>
+      <ol class="kjennetegn">
+        <li><strong>Fra «storytelling» til felles arbeid</strong><span>Mange nettverk blir stående ved å utveksle historier og hjelpe hverandre ved behov (Little, 1990). Et læringsnettverk beveger seg mot <em>joint work</em>: deltakerne planlegger, observerer, analyserer og evaluerer praksis sammen – og samarbeidet forplikter også mellom samlingene.</span></li>
+        <li><strong>En undersøkende og datainformert tilnærming</strong><span>Deltakerne samles om reelle utfordringer og bruker elevstemmer, observasjoner og vurderinger til å sette felles mål: «Hva skjer med barnas og elevenes læring hvis vi endrer praksisen slik?»</span></li>
+        <li><strong>Psykologisk trygghet og relasjonell tillit</strong><span>Dyp profesjonell læring krever at vi tør å vise usikkerhet, dilemmaer og forsøk som ikke lyktes – og unngår «hyggelighetsfellen» der alle er enige (jf. Bryk &amp; Schneider).</span></li>
+        <li><strong>Grensekryssing og ekstern forstyrrelse</strong><span>Partnerskapet mellom UH og skole/barnehage tilfører forskningsbaserte perspektiver som kan utfordre taus kunnskap og etablerte sannheter (dobbelkretslæring, jf. Argyris &amp; Schön).</span></li>
+        <li><strong>Koblinger til ledelse og skoleeiers strategiske mål</strong><span>Nettverket har faglig frihet, samtidig som arbeidet er etterspurt og ressurssatt av styrer, rektor og eier – gjensidig ansvarlighet.</span></li>
+      </ol>
+    </div>
+    <div class="detail-card kort-gronn">
+      <h2>Hva skal nettverksmøtene inneholde?</h2>
+      <p>Vi bygger innholdet i det andre nettverksåret sammen. Dette er utgangspunktet – fyll gjerne på lista.</p>
+      <h3>Innholdskomponenter</h3>
+      <div class="chips">
+        <span class="chip">Faglig innlegg</span><span class="chip">Deling</span><span class="chip">Workshops</span><span class="chip">Barnehage- og skolebesøk</span><span class="chip">Eksterne gjester (næringsliv, PPT)</span><span class="chip">Arbeidsøkter</span><span class="chip">Veiledning</span>
+      </div>
+      <h3>Aktuelle problemstillinger og tema</h3>
+      <div class="chips">
+        <span class="chip">Fra drift til utvikling</span><span class="chip">KI</span><span class="chip">Planarbeid</span><a class="chip" href="#menti" style="border-style: dashed; text-decoration: none;">+ ditt forslag i Menti</a>
+      </div>
+      <div class="note-box">
+        Hvilke av kjennetegnene til venstre er sterkest i nettverket vårt i dag – og hvilket vil vi jobbe mest med?
+      </div>
+      <div class="menti-boks" id="menti">
+        <div class="liten-etikett">Forslag til tema og innhold – svar i Menti</div>
+        <div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'><iframe sandbox='allow-popups allow-scripts allow-same-origin allow-presentation' allowfullscreen='true' allowtransparency='true' frameborder='0' height='315' src='https://www.mentimeter.com/app/presentation/albqcgihfo8jdvd92syp4vaijgj3spy6/embed' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;' width='420' title='Mentimeter – forslag til tema og innhold'></iframe></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═════════ GOODLAD ═════════ -->
+  <div class="seksjon-stripe stripe-brun" id="goodlad">Del 1 · Hva styrer undervisningen i mitt fag?</div>
+
+  <div class="goodlad-hero">
+    <div class="goodlad-kicker">John Goodlad · Fem læreplannivåer</div>
+    <h2 class="goodlad-tittel">Læreplanen finnes ikke bare <em>ett</em> sted</h2>
+    <p class="goodlad-ingress">Mellom ideene i samfunnsdebatten og det et barn faktisk erfarer, går en læreplan gjennom flere oversettelser: den skrives, tolkes, omsettes til aktiviteter og oppleves. På hvert trinn kan noe forsterkes, forsvinne eller komme til. Goodlads modell hjelper oss å se hvor vi selv tar valg – og hvor andre, som læreverk, plattformer og KI, tar dem for oss.</p>
+    <p class="goodlad-kilde">Goodlad, Klein &amp; Tye (1979), s. 58–65</p>
+
+    <div class="trapp" role="navigation" aria-label="Goodlads fem læreplannivåer">
+      <a class="trinn t1" href="#niva-1"><span class="trinn-nr">1</span><span class="trinn-navn">Ideenes læreplan</span><span class="trinn-hvem">Samfunnsdebatt, verdier, forskning</span></a>
+      <a class="trinn t2" href="#niva-2"><span class="trinn-nr">2</span><span class="trinn-navn">Den formelle læreplan</span><span class="trinn-hvem">Læreplan og rammeplan</span></a>
+      <a class="trinn t3" href="#niva-3"><span class="trinn-nr">3</span><span class="trinn-navn">Den oppfattede læreplan</span><span class="trinn-hvem">Hvordan vi tolker planen · walk and talk</span></a>
+      <a class="trinn t4" href="#niva-4"><span class="trinn-nr">4</span><span class="trinn-navn">Den operasjonaliserte læreplan</span><span class="trinn-hvem">Det som faktisk skjer i praksis</span></a>
+      <a class="trinn t5" href="#niva-5"><span class="trinn-nr">5</span><span class="trinn-navn">Den erfarte læreplan</span><span class="trinn-hvem">Det barn og elever sitter igjen med</span></a>
+    </div>
+    <div class="trapp-pil"><span>Fra idé</span><span>til erfaring →</span></div>
+  </div>
+
+  <div class="two-col-stretch">
+    <div class="detail-card kort-brun">
+      <div class="liten-etikett">Mål for denne delen av samlingen</div>
+      <ol class="question-list" style="margin-top: 0.4rem;">
+        <li><strong>Modellere</strong> en måte å jobbe med læreplan- og rammeplanarbeid og PfDK på – som dere kan ta med tilbake til egen enhet.</li>
+        <li><strong>Skape trygghet og bevissthet</strong> rundt skolens og barnehagens samfunnsmandat knyttet til digitalisering.</li>
+      </ol>
+    </div>
+    <div class="detail-card kort-brun">
+      <div class="liten-etikett">Slik jobber vi</div>
+      <p>Vi går gjennom nivåene ett for ett. Hvert nivå har en kort oppgave. Deltakerne setter seg ved bordet for det faget eller fagområdet de vil analysere, og tar med seg det samme faget gjennom alle fem nivåene.</p>
+      <div class="chips">
+        <span class="chip chip-skole">Norsk</span><span class="chip chip-skole">Engelsk</span><span class="chip chip-skole">Matematikk</span><span class="chip chip-skole">Samfunnsfag</span><span class="chip chip-skole">Naturfag</span><span class="chip chip-skole">Kunst og håndverk</span><span class="chip chip-skole">Kroppsøving</span><span class="chip chip-skole">KRLE</span><span class="chip chip-skole">Musikk</span><span class="chip chip-skole">Mat og helse</span><span class="chip chip-skole">Norsk for språklige minoriteter</span><span class="chip chip-skole">FOV</span>
+      </div>
+      <div class="chips">
+        <span class="chip chip-bhg">Kommunikasjon, språk og tekst</span><span class="chip chip-bhg">Kropp, bevegelse, mat og helse</span><span class="chip chip-bhg">Kunst, kultur og kreativitet</span><span class="chip chip-bhg">Natur, miljø og teknologi</span><span class="chip chip-bhg">Antall, rom og form</span><span class="chip chip-bhg">Etikk, religion og filosofi</span><span class="chip chip-bhg">Nærmiljø og samfunn</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nivå 1 -->
+  <article class="niva n1" id="niva-1">
+    <div class="niva-side">
+      <div class="nr">1</div>
+      <div class="navn">Ideenes læreplan</div>
+      <div class="hvem">Hvem: samfunnsdebatten, politikere, forskere, medier</div>
+    </div>
+    <div class="niva-innhold">
+      <p>De overordnede ideene og verdiene som former hva skole og barnehage skal være. De kan bygge på pedagogiske teorier, kulturelle verdier eller det samfunnet til enhver tid mener det trenger – og de er ofte i konflikt med hverandre.</p>
+      <div class="felles-oppgave">
+        <div class="liten-etikett">Oppgave</div>
+        <p>Hvilke ideer om skolens og barnehagens oppgave kommer til uttrykk i dagens samfunnsdebatt? <strong>Finn to utspill som uttrykker ulike syn på hva skolen og barnehagen bør være.</strong> Hvilke verdier og forestillinger om læring ligger bak?</p>
+      </div>
+      <h3>Hvem i galleriet får mest plass i utspillene dere finner?</h3>
+      <div class="chips">
+        <span class="chip">Barnehagebarn</span><span class="chip">Elev</span><span class="chip">Forelder</span><span class="chip">Barnehagelærer</span><span class="chip">Barne- og ungdomsarbeider</span><span class="chip">Lærer</span><span class="chip">Styrer</span><span class="chip">Rektor</span><span class="chip">Politiker</span><span class="chip">Barnehageforsker</span><span class="chip">Klasseromsforsker</span><span class="chip">Lærerutdanner</span><span class="chip">Læremiddelprodusent</span><span class="chip">Representant for arbeidslivet</span><span class="chip">Journalist</span><span class="chip">Influenser</span><span class="chip">Sokrates</span>
+      </div>
+      <div class="digital-linse">
+        <b>Digital linse</b>
+        Debatten om skjerm i skole og barnehage er et tydelig eksempel på ideenes læreplan: Overskrifter som «En polarisert debatt om skjerm er skadelig for skolen», «Lektor vil ha mer pugg, krav og konsekvenser» og saker om bruk av digitale verktøy i barnehagen trekker i ulike retninger. Legg merke til hvem som snakker – og hvem som ikke gjør det.
+      </div>
+    </div>
+  </article>
+
+  <!-- Nivå 2 -->
+  <article class="niva n2" id="niva-2">
+    <div class="niva-side">
+      <div class="nr">2</div>
+      <div class="navn">Den formelle læreplan</div>
+      <div class="hvem">Hvem: myndighetene – LK20 og rammeplanen</div>
+    </div>
+    <div class="niva-innhold">
+      <p>Det offisielle dokumentet fra utdanningsmyndighetene: fag, kjerneelementer, grunnleggende ferdigheter og kompetansemål i skolen – fagområder og mål for barnehagens arbeid i rammeplanen.</p>
+      <div class="felles-oppgave">
+        <div class="liten-etikett">Oppgave · Undersøk sammenhenger</div>
+        <p>Finn fram fagplanen eller fagområdet dere vil jobbe med. Snakk sammen om hva dere mener er kjernen, og se etter sammenhenger mellom rammeverket for grunnleggende digitale ferdigheter, barnehagens digitale praksis og planen.</p>
+      </div>
+      <div class="spor">
+        <div class="mini-box spor-skole">
           <h3>Skole</h3>
-          <p>For skolen kan samlingen gi grunnlag for refleksjon om hvordan teknologi brukes i undervisning, vurdering og læringsledelse.</p>
           <ul class="question-list">
-            <li>Hva trenger elevene våre for å utvikle digital dømmekraft?</li>
-            <li>Hvordan bruker vi teknologi på måter som støtter fordypning og konsentrasjon?</li>
-            <li>Hvilke digitale praksiser er godt forankret i læreplan og pedagogiske mål?</li>
-            <li>Hvilke praksiser bør vi undersøke mer kritisk?</li>
+            <li>Finn kjerneelementene og de grunnleggende ferdighetene i faget, og velg ett kompetansemål.</li>
+            <li>Hva skal elevene forstå og kunne gjøre i dette kompetansemålet?</li>
+            <li>Hvordan kommer fagets kjerneelementer og digitale ferdigheter til uttrykk i kompetansemålet?</li>
           </ul>
+          <a class="resource-link" href="https://www.udir.no/laring-og-trivsel/lareplanverket/" target="_blank" rel="noopener noreferrer">Læreplanverket hos Udir →</a>
+        </div>
+        <div class="mini-box spor-bhg">
+          <h3>Barnehage</h3>
+          <ul class="question-list">
+            <li>Finn fagområdet i rammeplanen og det som står om barnehagens digitale praksis.</li>
+            <li>Hva skal barna få erfare og oppleve innenfor dette fagområdet?</li>
+            <li>Hvordan kommer fagområdets sentrale tema og digital praksis til uttrykk – og henger de sammen?</li>
+          </ul>
+          <a class="resource-link" href="https://www.udir.no/laring-og-trivsel/rammeplan-for-barnehagen/" target="_blank" rel="noopener noreferrer" style="background: var(--gronn);">Rammeplanen hos Udir →</a>
         </div>
       </div>
+      <div class="digital-linse">
+        <b>Digital linse · Nytt fra 1. august 2026</b>
+        Den formelle læreplanen er i bevegelse: I alle læreplaner for 1.–4. trinn er det presisert at bruken av digitale enheter skal være særskilt varsom og ikke dominere undervisningen. Læreplanen i matematikk 1–10 er også justert. Hvordan påvirker slike endringer det dere leser ut av planen?
+      </div>
+    </div>
+  </article>
 
-      <div class="detail-card">
-        <h2>Videre arbeid lokalt</h2>
-        <p>Mellom første og neste samling kan hver enhet arbeide videre med en enkel situasjonsanalyse. Målet er å få fram hva enheten trenger, hva den allerede er god på, og hvilke ressurser som finnes i personalet.</p>
-        <ul class="question-list">
-          <li>Hva trenger vi hos oss akkurat nå?</li>
-          <li>Hva er vi gode på allerede?</li>
-          <li>Hva opplever vi som utfordrende?</li>
-          <li>Hvilke ressurser og erfaringer finnes i personalet?</li>
-          <li>Hva vet vi om barnas og elevenes digitale liv?</li>
-          <li>Hvordan henger dette sammen med mandatet i rammeplan og læreplan?</li>
-        </ul>
-        <div class="note-box">
-          Dette kan brukes som utgangspunkt for en lokal prosjektskisse eller en felles plan for videre kompetanseutvikling.
+  <!-- Nivå 3 -->
+  <article class="niva n3" id="niva-3">
+    <div class="niva-side">
+      <div class="nr">3</div>
+      <div class="navn">Den oppfattede læreplan</div>
+      <div class="hvem">Hvem: lærere, barnehagelærere og ansatte</div>
+    </div>
+    <div class="niva-innhold">
+      <p>Hvordan vi som profesjonsutøvere tolker den formelle planen. Tolkningen varierer med pedagogisk overbevisning, erfaring og fagkultur – to lærere kan lese det samme kompetansemålet svært ulikt.</p>
+      <h3>Signaturpedagogikk</h3>
+      <p class="sitat-inline">Signaturpedagogikk er et mønster som går utover den enkelte pedagogs personlige stil.</p>
+      <p style="color: var(--tekst-lys); font-size: 0.9rem; line-height: 1.7;">Shulman (2005) beskriver undervisningsformer som praktiseres på tvers av pedagoger, emner og institusjoner, og som er så innarbeidet at de kjennetegner utdanningskulturen. Formen er ikke nøytral: gjennom gjentatte arbeidsmåter lærer man hva man skal legge merke til, hvilke spørsmål som teller, hva som krever begrunnelse – og hvem som avgjør om noe er holdbart.</p>
+      <div class="walk-talk">
+        <div class="walk-topp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="M11 21l2-6-3-3 1-5 4 3 3 1"/><path d="M10 12l-2 3-3 1"/></svg>
+          <div>
+            <div class="liten-etikett" style="color: var(--sand); margin-bottom: 0.1rem;">Oppgave · Walk and talk</div>
+            <div class="walk-tittel">Gå ut – og snakk om det som oppleves som selvsagt</div>
+          </div>
+        </div>
+        <p>Gå sammen to og to, gjerne med en fra samme fag eller fagområde. Det som sitter i kroppen og vanene, er ofte lettere å sette ord på når man går side om side enn når man sitter ansikt til ansikt. Ta med spørsmålene under på turen – ett om gangen.</p>
+        <ol class="walk-etapper">
+          <li><span>Underveis</span>Hva legger dere særlig vekt på når barn og unge skal lære og utvikle forståelse i deres fag eller fagområde?</li>
+          <li><span>Underveis</span>Hva mener dere de må få gjøre og erfare – og hvorfor?</li>
+          <li><span>På vei tilbake</span>Hva kjenner dere igjen hos hverandre? Hvilke arbeidsmåter oppfatter dere som selvsagte? Hvor finnes det uenighet?</li>
+        </ol>
+        <div class="walk-retur">
+          <strong>Når dere er tilbake:</strong> Del én arbeidsmåte dere oppfatter som selvsagt – og ett sted der dere var uenige.
+        </div>
+      </div>
+      <div class="spor">
+        <div class="mini-box spor-skole">
+          <h3>Skole · ta med på turen</h3>
+          <p>Hva skjer med den pedagogiske strukturen når et digitalt læreverk, en plattform eller KI inngår?</p>
+        </div>
+        <div class="mini-box spor-bhg">
+          <h3>Barnehage · ta med på turen</h3>
+          <p>Hva skjer med den pedagogiske praksisen når digitale verktøy, apper eller KI inngår i lek, utforsking og læring?</p>
         </div>
       </div>
     </div>
+  </article>
 
-    <aside>
-      <div class="image-card">
-        <h2>Presentasjon fra samlingen</h2>
-        <div class="pfdk-image-wrap">
-          <a href="første_samling_nordmøre.pdf" target="_blank" rel="noopener noreferrer">
-            <img src="forside_presentasjon.png" alt="Forside presentasjon – Oppstart Digitalpedagog-nettverk" class="pfdk-image">
-          </a>
+  <!-- Nivå 4 -->
+  <article class="niva n4" id="niva-4">
+    <div class="niva-side">
+      <div class="nr">4</div>
+      <div class="navn">Den operasjonaliserte læreplan</div>
+      <div class="hvem">Hvor: i klasserommet og på avdelingen</div>
+    </div>
+    <div class="niva-innhold">
+      <p>Planen slik den faktisk gjennomføres: aktiviteter, arbeidsmåter, vurdering og ressurser. Her blir det synlig hvor mye som bestemmes av oss selv – og hvor mye som følger med læreverket eller den digitale ressursen.</p>
+      <div class="spor">
+        <div class="mini-box spor-skole">
+          <h3>Skole</h3>
+          <ul class="question-list">
+            <li>Hvordan operasjonaliserer du læreplanens kompetansemål i faget?</li>
+            <li>Hvordan operasjonaliseres læring i de digitale læreverkene?</li>
+            <li>Hvilke valg tar vi selv, og hvilke føringer følger vi fra læreverket?</li>
+          </ul>
+        </div>
+        <div class="mini-box spor-bhg">
+          <h3>Barnehage</h3>
+          <ul class="question-list">
+            <li>Hvordan støtter de digitale ressursene dere bruker arbeidet med rammeplanens fagområder og mål?</li>
+            <li>Hvilke pedagogiske valg tar dere selv, og hvilke føringer følger med de digitale ressursene?</li>
+          </ul>
         </div>
       </div>
-
-      <div class="image-card">
-        <h2>Teknologiforståelse i pedagogisk praksis</h2>
-        <p>Tabellen viser fire dimensjoner for analyse av digitale verktøy i pedagogisk bruk: artefakt, kunnskap, prosess/aktivitet og makt, påvirkning og skiller.</p>
-        <div class="pfdk-image-wrap">
-          <img src="Custer.png" alt="Tabell over fire dimensjoner av teknologiforståelse" class="pfdk-image">
-        </div>
-        <p class="caption">Tabellen kan brukes til å analysere digitale verktøy i egen undervisnings- og barnehagepraksis.</p>
+      <div class="digital-linse">
+        <b>Digital linse</b>
+        Et digitalt læreverk eller en app har sin egen «innebygde» operasjonalisering av læreplanen – rekkefølge, oppgavetyper, tilbakemeldinger. Når vi bruker den, overtar vi også noen av valgene som noen andre har tatt.
       </div>
+    </div>
+  </article>
 
-      <div class="image-card">
-        <h2>TPACK – faglig rammeverk</h2>
-        <p>TPACK-rammeverket (Technological Pedagogical Content Knowledge) beskriver samspillet mellom teknologikunnskap, fagkunnskap og pedagogisk kunnskap – og er ett av de internasjonale grunnlagene for PfDK.</p>
-        <a class="resource-link" href="tpack.html">Les norsk sammendrag av TPACK →</a>
+  <!-- Nivå 5 -->
+  <article class="niva n5" id="niva-5">
+    <div class="niva-side">
+      <div class="nr">5</div>
+      <div class="navn">Den erfarte læreplan</div>
+      <div class="hvem">Hvem: barn, elever og voksne deltakere</div>
+    </div>
+    <div class="niva-innhold">
+      <p>Det barn, elever og voksne deltakere faktisk får ut av og opplever i den pedagogiske praksisen. Den kan skille seg mye fra den formelle planen – på grunn av undervisningsstil, læringsstil eller kulturen i rommet.</p>
+      <div class="felles-oppgave">
+        <div class="liten-etikett">Oppgave</div>
+        <p><strong>Hvordan kan vi få innsikt i den erfarte læreplanen – og rammeplanen?</strong> Hvilke spor etterlater den, og hvem må vi spørre?</p>
       </div>
+      <div class="digital-linse">
+        <b>Eksempler fra samlingen</b>
+        Elevrådenes innspill til den regionale planen – mer praktisk undervisning, programmering og digitale verktøy, psykisk helse og bedre klasseledelse – er en stemme fra den erfarte læreplanen. Det samme er en ny rapport som viser at barn og ansatte vurderer trivsel ulikt. Elevstemmer, barnesamtaler og observasjon er data vi kan bruke i nettverket.
+      </div>
+    </div>
+  </article>
 
-      <div class="image-card">
-        <h2>Rammeverk for PfDK</h2>
-        <p>Denne modellen viser kompetanseområdene i lærerens profesjonsfaglige digitale kompetanse. Klikk på bildet eller knappen for å gå til Udir.</p>
-        <div class="pfdk-image-wrap">
-          <a href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener noreferrer">
-            <img src="larerens_pfdk-modell.png" alt="Modell for lærerens profesjonsfaglige digitale kompetanse" class="pfdk-image">
-          </a>
-        </div>
-        <p class="caption">Bildet er lenket til Udirs side om rammeverket for lærerens profesjonsfaglige digitale kompetanse.</p>
-        <a class="resource-link" href="https://www.udir.no/kvalitet-og-kompetanse/digitalisering-skole/rammeverk-larerens-profesjonsfaglige-digitale-komp/" target="_blank" rel="noopener noreferrer">Åpne rammeverket hos Udir</a>
+  <!-- PISA-koblingen -->
+  <div class="two-col-stretch" style="margin-top: 1.5rem;">
+    <div class="detail-card kort-navy">
+      <div class="liten-etikett">Når nivåene kobles sammen</div>
+      <h2>PISA-resultatene</h2>
+      <p>PISA måler noe av det elevene sitter igjen med – men resultatene blir raskt utgangspunkt for ulike fortellinger om hva som skjer i skolen. Slik vandrer de tilbake til ideenes læreplan, og videre inn i nye formelle krav.</p>
+      <div class="note-box" style="background: #eef3f8; border-left-color: var(--navy-lys); color: var(--navy);">
+        <strong>Hvilke ledd mellom resultat, forklaring og foreslått tiltak er dokumentert – og hvilke bygger på antakelser?</strong>
       </div>
-    </aside>
+    </div>
+    <div class="prompt-card kort-brun" style="margin-bottom: 0;">
+      <h2>Ta med tilbake</h2>
+      <ul class="question-list">
+        <li>Mellom hvilke nivåer ser vi de største glippene i vårt fag eller fagområde?</li>
+        <li>Hvor tar vi selv de pedagogiske valgene – og hvor har vi gitt dem fra oss til et læreverk, en plattform eller KI?</li>
+        <li>Hvordan kan vi bruke de fem nivåene sammen med kollegaene våre, for eksempel på et personalmøte?</li>
+        <li>Hvilken av oppgavene kan bli et konkret felles arbeid i nettverksgruppa?</li>
+      </ul>
+    </div>
   </div>
-</section>
+
+  <!-- ═════════ TEACH-MEET ═════════ -->
+  <div class="seksjon-stripe stripe-sand">Erfaringsdeling · Teach-meet</div>
+  <div class="two-col-stretch">
+    <div class="detail-card kort-sand">
+      <h2>Hva fungerer – hva er utfordringer?</h2>
+      <p>Hver deltaker får tre minutter. Del hva dere har gjort eller planlagt å gjøre med surveyen og prosjektbeskrivelsen – og/eller et tips knyttet til digitale ressurser.</p>
+      <ul class="question-list" style="margin-top: 0.5rem;">
+        <li>Hva har du lykkes med?</li>
+        <li>Hva har vært utfordringene?</li>
+      </ul>
+      <div class="note-box">
+        Utfordringene er like verdifulle som suksessene. Det er i det som ikke fungerte at nettverket kan hjelpe mest.
+      </div>
+    </div>
+    <div class="detail-card kort-gronn">
+      <h2>Fra deling til felles arbeid</h2>
+      <p>Etter presentasjonene diskuterer vi utfordringene sammen. Målet er å bevege oss fra å fortelle hverandre historier til å finne problemstillinger nettverksgruppene kan jobbe med over tid – i tråd med kjennetegnene på et læringsnettverk.</p>
+      <ul class="question-list" style="margin-top: 0.5rem;">
+        <li>Hvilke utfordringer går igjen på tvers av enhetene?</li>
+        <li>Hvilke av dem kan vi undersøke sammen fram mot neste samling?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═════════ AVSLUTNING ═════════ -->
+  <div class="seksjon-stripe stripe-gronn">Avslutning og veien videre</div>
+  <div class="detail-card kort-gronn" style="margin-top: 1rem;">
+    <h2>Hva ønsker vi neste gang?</h2>
+    <p>Det andre nettverksåret skal i større grad bygges ut fra enhetenes egne behov. Vi avslutter med å samle ønsker til innhold, form og tema for de neste samlingene – og med å se fram mot fagdagen (Mini NKUL) 3. januar 2028.</p>
+    <a class="resource-link" href="samling-5.html" style="background: var(--gronn);">Tilbake til samling 5 →</a>
+    <a class="resource-link" href="tpack.html" style="margin-left: 0.4rem;">Les om TPACK →</a>
+  </div>
+
+  <!-- Kilder -->
+  <div class="detail-card" style="margin-top: 1.5rem;">
+    <div class="liten-etikett">Kilder</div>
+    <ul class="kilder">
+      <li>Goodlad, J. I., Klein, M. F. &amp; Tye, K. A. (1979). The domains of curriculum and their study. I J. I. Goodlad mfl., <em>Curriculum inquiry: The study of curriculum practice</em> (s. 58–65). McGraw-Hill.</li>
+      <li>Shulman, L. S. (2005). Signature pedagogies in the professions. <em>Daedalus, 134</em>(3), 52–59.</li>
+      <li>Little, J. W. (1990). The persistence of privacy: Autonomy and initiative in teachers’ professional relations. <em>Teachers College Record, 91</em>(4), 509–536.</li>
+      <li>Bryk, A. S. &amp; Schneider, B. (2002). <em>Trust in schools: A core resource for improvement.</em> Russell Sage Foundation.</li>
+      <li>Argyris, C. &amp; Schön, D. A. (1978). <em>Organizational learning: A theory of action perspective.</em> Addison-Wesley.</li>
+    </ul>
+  </div>
+
+</div>
 
 <footer>
   <strong>Digitalpedagog-nettverk Nordmøre</strong><br>
-  I samarbeid med NTNU og DMMH
+  I samarbeid med NTNU og DMMH · Mari-Ann Letnes og Cecilie Skaalvik
 </footer>
+
 </body>
 </html>
