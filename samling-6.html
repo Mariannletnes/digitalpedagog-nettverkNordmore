@@ -345,6 +345,70 @@
     line-height: 1.6;
   }
 
+  /* ── Snakk og bytt ── */
+  #snakk-og-bytt { scroll-margin-top: 70px; }
+  .program-split-row a { color: var(--brun); font-weight: 500; }
+  .sb-kortrad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin: 1.1rem 0 0.4rem;
+  }
+  .sb-kort {
+    background: color-mix(in srgb, var(--f) 10%, #fff);
+    border: 1.5px solid var(--f);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    color: var(--tekst);
+    box-shadow: 0 2px 8px rgba(74,46,26,0.08);
+  }
+  .sb-kort:nth-child(odd) { transform: rotate(-2deg); }
+  .sb-kort:nth-child(even) { transform: rotate(1.5deg); }
+  .sb-topp {
+    background: var(--f);
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.62rem;
+    padding: 0.35rem 0.2rem;
+  }
+  .sb-kropp {
+    flex: 1;
+    padding: 0.5rem 0.45rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sb-kropp em { display: block; color: var(--tekst-lys); margin-bottom: 0.3rem; }
+  .sb-stor { font-size: 0.8rem; font-weight: 500; }
+  .sb-eller {
+    display: inline-block;
+    align-self: center;
+    background: var(--f);
+    color: #fff;
+    border-radius: 10px;
+    padding: 0.05rem 0.5rem;
+    margin: 0.35rem 0;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .sb-farge { text-align: center; font-size: 0.58rem; color: var(--tekst-lys); padding-bottom: 0.35rem; }
+  .sb-farge::before { content: '●'; color: var(--f); margin-right: 0.25rem; }
+  .sb-blank .sb-kropp { color: var(--tekst-lys); font-style: italic; border: 1.5px dashed color-mix(in srgb, var(--f) 50%, #fff); margin: 0.45rem; border-radius: 6px; }
+  .sb-nedlast { display: flex; flex-wrap: wrap; gap: 0 0.5rem; }
+  @media (max-width: 520px) {
+    .sb-kortrad { grid-template-columns: repeat(2, 1fr); }
+  }
+
   .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
   .chip {
     font-size: 0.76rem;
@@ -452,8 +516,8 @@
     </div>
     <div class="program-split-row">
       <div class="col-tid">09.15–10.00</div>
-      <div class="col-skole">Siden sist · Redefinering av nettverket</div>
-      <div class="col-bhg">Siden sist · Redefinering av nettverket</div>
+      <div class="col-skole">Oppstart: <a href="#snakk-og-bytt">Snakk og bytt</a> · Siden sist · Redefinering av nettverket</div>
+      <div class="col-bhg">Oppstart: <a href="#snakk-og-bytt">Snakk og bytt</a> · Siden sist · Redefinering av nettverket</div>
     </div>
     <div class="program-split-row">
       <div class="col-tid">10.00–10.15</div>
@@ -485,6 +549,49 @@
   </div>
 
   <!-- ═════════ SIDEN SIST OG REDEFINERING ═════════ -->
+  <!-- ═════════ OPPSTART: SNAKK OG BYTT ═════════ -->
+  <div class="seksjon-stripe stripe-sand" id="snakk-og-bytt">Oppstart · Snakk og bytt</div>
+  <div class="two-col-stretch">
+    <div class="detail-card kort-sand">
+      <h2>Snakk og bytt</h2>
+      <p>Vi åpnet dagen med en rask blandeøvelse. Alle får et kort med et spørsmål eller et dilemma, går rundt i rommet og snakker med noen de ikke kjenner så godt. Etter hver samtale bytter man kort – og tar med seg et nytt spørsmål videre.</p>
+      <p>Øvelsen er lett og litt tullete med vilje. Den senker terskelen for å snakke sammen, og er en enkel start på det som gjør et nettverk til et læringsnettverk: <a href="#kjennetegn" style="color: var(--brun);">psykologisk trygghet og relasjonell tillit</a>.</p>
+      <h3>Slik gjør dere</h3>
+      <ol class="question-list">
+        <li>Del ut ett kort til hver. Sett på musikk, og la alle gå rundt i rommet.</li>
+        <li>Musikken stopper: finn nærmeste person du ikke kjenner. Si navn og hvor du jobber.</li>
+        <li>Les kortet ditt høyt, og la den andre svare. Så bytter dere. Ca. 2 minutter.</li>
+        <li>Bytt kort, takk for praten, og vent på musikken. Kjør 5–6 runder.</li>
+      </ol>
+      <div class="note-box">
+        <strong>Dilemma:</strong> Begge må velge ett av alternativene. Ingen midt-imellom-svar!
+      </div>
+      <h3>Bruk fargene senere</h3>
+      <ul class="question-list">
+        <li><strong>Fargegrupper:</strong> «Finn alle som har samme farge som deg.»</li>
+        <li><strong>Regnbuegrupper:</strong> «Lag en gruppe der alle har ulik farge» – gir blandede grupper på tvers av salen.</li>
+        <li><strong>Hvem starter?</strong> Trekk en farge når en gruppe skal legge fram.</li>
+      </ul>
+    </div>
+    <div class="detail-card kort-brun">
+      <h2>Kortene – ta dem med hjem</h2>
+      <p>Her er kortene vi brukte, og en mal med blanke kort der dere kan skrive egne spørsmål og dilemmaer – for eksempel til et personalmøte, en plandag eller med elevene.</p>
+      <div class="sb-kortrad" aria-hidden="true">
+        <div class="sb-kort" style="--f: #e63946;"><div class="sb-topp">Dilemma</div><div class="sb-kropp"><em>Vil du heller …</em>ha en personlig jingel som spilles hver gang du kommer inn i et rom<span class="sb-eller">eller</span>ha en stemme som kommenterer alt du gjør i tredjeperson</div><div class="sb-farge">Rød</div></div>
+        <div class="sb-kort" style="--f: #f4842a;"><div class="sb-topp">Spørsmål</div><div class="sb-kropp sb-stor">Hva er det rareste du noen gang har spist?</div><div class="sb-farge">Oransje</div></div>
+        <div class="sb-kort" style="--f: #16b3b0;"><div class="sb-topp">Spørsmål</div><div class="sb-kropp sb-stor">Hva er din mest ubrukelige ferdighet? Vis den gjerne!</div><div class="sb-farge">Turkis</div></div>
+        <div class="sb-kort sb-blank" style="--f: #7b4db5;"><div class="sb-topp">Spørsmål</div><div class="sb-kropp sb-stor">Skriv ditt eget spørsmål her</div><div class="sb-farge">Lilla</div></div>
+      </div>
+      <div class="sb-nedlast">
+        <a class="resource-link" href="snakk-og-bytt-kort.pdf" target="_blank" rel="noopener noreferrer">Kortene vi brukte (PDF) →</a>
+        <a class="resource-link" href="snakk-og-bytt-blanke-kort.docx" download style="background: var(--brun);">Blanke kort – lag dine egne (Word) →</a>
+      </div>
+      <div class="note-box">
+        <strong>Utskrift:</strong> Skriv ut i farger på A4, 100 % / faktisk størrelse, dobbeltsidig med «vend på langsiden». Ta gjerne et testark først og hold det mot lyset. Tykt papir (160–200 g) gjør kortene mer holdbare. Klipp langs de stiplede linjene.
+      </div>
+    </div>
+  </div>
+
   <div class="seksjon-stripe stripe-navy">Siden sist og redefinering av nettverket</div>
 
   <div class="detail-card kort-navy" style="margin-top: 1rem;">
@@ -544,7 +651,7 @@
   </div>
 
   <div class="two-col-stretch">
-    <div class="detail-card kort-navy">
+    <div class="detail-card kort-navy" id="kjennetegn" style="scroll-margin-top: 80px;">
       <h2>Hva kjennetegner et læringsnettverk?</h2>
       <ol class="kjennetegn">
         <li><strong>Fra «storytelling» til felles arbeid</strong><span>Mange nettverk blir stående ved å utveksle historier og hjelpe hverandre ved behov (Little, 1990). Et læringsnettverk beveger seg mot <em>joint work</em>: deltakerne planlegger, observerer, analyserer og evaluerer praksis sammen – og samarbeidet forplikter også mellom samlingene.</span></li>
